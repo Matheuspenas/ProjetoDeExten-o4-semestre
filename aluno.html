@@ -3,42 +3,44 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Solicitação - Central de Serviços de TI</title>
+    <title>Tela de Solicitação</title>
     <link rel="stylesheet" href="./css/aluno.css" />
   </head>
   <body>
-    <header class="top-bar">
+    <header class="header">
       <h1>Solicitação</h1>
-      <div class="menu-toggle" id="menu-toggle">☰</div>
+      <div class="menu-icon" id="menu-toggle">&#9776;</div>
     </header>
 
     <nav class="menu" id="menu">
       <ul>
+        <li><a href="#">Início</a></li>
         <li><a href="#">Perfil</a></li>
-        <li><a href="#">Meus Chamados</a></li>
-        <li><a href="#">Ajuda</a></li>
-        <li><a href="index.html">Sair</a></li>
+        <li><a href="#">Configurações</a></li>
+        <li><a href="#">Sair</a></li>
       </ul>
     </nav>
 
     <main class="container">
       <button class="btn-novo">+ Abrir Novo Chamado</button>
 
-      <div class="card">
-        <h3>Chamado 1</h3>
-        <p>Erro de Login</p>
-        <span class="status aberto">Status: Aberto</span>
+      <div class="chamados">
+        <div class="card">
+          <h3>Chamado 1</h3>
+          <p><strong>Descrição:</strong> Erro de Login</p>
+          <p class="status aberto">Status: Aberto</p>
+        </div>
+
+        <div class="card">
+          <h3>Chamado 2</h3>
+          <p><strong>Descrição:</strong> Erro no Sistema</p>
+          <p class="status andamento">Status: Em andamento</p>
+        </div>
       </div>
 
-      <div class="card">
-        <h3>Chamado 2</h3>
-        <p>Erro no Sistema</p>
-        <span class="status andamento">Status: Em andamento</span>
-      </div>
-
-      <a href="#" class="ver-mais">Ver mais ▼</a>
+      <button class="btn-ver-mais">Ver mais ↓</button>
     </main>
 
-    <script src="./aluno.js"></script>
+    <script src="./JavaScript/aluno.js"></script>
   </body>
 </html>

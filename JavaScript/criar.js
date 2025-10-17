@@ -1,22 +1,24 @@
 // Aguarda o carregamento completo da página
 document.addEventListener("DOMContentLoaded", function () {
-  const btnLogin = document.querySelector(".btn-login");
+  const btnCriar = document.querySelector(".btn-criar");
 
-  btnLogin.addEventListener("click", function () {
+  btnCriar.addEventListener("click", function () {
+    const nome = document.getElementById("nome").value.trim();
+    const sobrenome = document.getElementById("sobrenome").value.trim();
     const email = document.getElementById("email").value.trim();
     const senha = document.getElementById("senha").value.trim();
     const tipo = document.getElementById("tipo").value;
 
     // Verifica se todos os campos foram preenchidos
-    if (!email || !senha || !tipo) {
+    if (!nome || !sobrenome || !email || !senha || !tipo) {
       alert("Por favor, preencha todos os campos para continuar.");
       return;
     }
 
-    // Verifica se p email e valido
+    // Verifica se o email e valido
     const emailValido = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailValido.test(email)) {
-      alert("Por favor, insira um e-mail válido.");
+      alert("Por favor, insira um email válido.");
       return;
     }
 
@@ -26,7 +28,10 @@ document.addEventListener("DOMContentLoaded", function () {
       return;
     }
 
-    // Direciona o usuário conforme o escolhido no selct
+    // Mensagem após cadastro do usuário
+    alert(`Conta criada com sucesso! Bem-vindo(a), ${nome}!`);
+
+    // Direciona o usuário conforme o escolhido no select
     if (tipo === "gestor") {
       window.location.href = "./gestor.html";
     } else if (tipo === "aluno") {

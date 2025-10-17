@@ -53,6 +53,20 @@ input {
   font-size: 14px;
 }
 
+input,
+select {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 14px;
+}
+
+select {
+  background-color: #fff;
+  color: #333;
+}
+
 /* Botões */
 .btn-login {
   width: 100%;

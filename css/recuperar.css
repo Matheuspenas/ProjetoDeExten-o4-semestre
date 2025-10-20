@@ -1,0 +1,103 @@
+body {
+  background-color: #f7f9fc;
+  font-family: "Poppins", sans-serif;
+  color: #333;
+  margin: 0;
+}
+
+/* Seção de recuperação */
+.recuperar img {
+  width: 80px;
+}
+
+.recuperar {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: 60px;
+  font-size: large;
+}
+
+.form_recuperar {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: #333;
+  width: 420px;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  padding: 30px 20px;
+}
+
+.inputemail {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  font-size: larger;
+  font-weight: 600;
+  color: #1e63e9;
+  width: 100%;
+}
+
+#email {
+  width: 100%;
+  height: 45px;
+  margin: 10px 0;
+  padding-left: 10px;
+  border-radius: 8px;
+  border: 1.5px solid #1e63e9;
+  color: #333;
+  background-color: #fff;
+  font-size: 1rem;
+  outline: none;
+  transition: border-color 0.3s ease;
+}
+
+#email:focus {
+  border-color: #174eb9;
+  box-shadow: 0 0 0 2px rgba(30, 99, 233, 0.2);
+}
+
+.inputenviar {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: larger;
+  font-weight: 600;
+  margin-top: 15px;
+}
+
+.enviar {
+  width: 200px;
+  height: 45px;
+  margin-top: 10px;
+  border-radius: 50px;
+  border: none;
+  color: white;
+  background-color: #1e63e9;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.enviar:hover {
+  background-color: #174eb9;
+  transform: translateY(-2px);
+}
+
+.enviar:active {
+  background-color: #133e96;
+  transform: translateY(0);
+}
+
+footer {
+  margin-top: auto;
+  text-align: center;
+  font-size: 12px;
+  color: #777;
+  padding: 15px 0;
+}

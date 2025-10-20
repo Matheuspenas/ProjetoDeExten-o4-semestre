@@ -5,8 +5,9 @@ body {
   color: #333;
 }
 
+/* HEADER COM DEGRADÊ AZUL */
 .header {
-  background-color: #1e63e9;
+  background: linear-gradient(to right, #0a3c9a, #1e63e9, #66a3ff);
   color: #fff;
   display: flex;
   justify-content: space-between;
@@ -26,13 +27,18 @@ body {
   transition: transform 0.3s ease;
 }
 
+.menu-icon:hover {
+  transform: scale(1.1);
+}
+
+/* MENU LATERAL COM DEGRADÊ COMPATÍVEL */
 .menu {
   position: fixed;
   top: 0;
   right: -220px;
   width: 200px;
   height: 100%;
-  background-color: #1e63e9;
+  background: linear-gradient(to bottom, #0a3c9a, #1e63e9, #66a3ff);
   color: white;
   transition: right 0.3s ease;
   padding-top: 70px;
@@ -52,6 +58,11 @@ body {
   color: white;
   text-decoration: none;
   font-size: 1rem;
+  transition: color 0.2s ease;
+}
+
+.menu ul li a:hover {
+  color: #cce0ff;
 }
 
 .menu.show {

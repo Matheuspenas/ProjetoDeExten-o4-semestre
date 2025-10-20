@@ -30,29 +30,6 @@ window.addEventListener("click", (e) => {
   }
 });
 
-// Cadastrar chamado
-formChamado.addEventListener("submit", (e) => {
-  e.preventDefault();
-
-  const titulo = document.getElementById("titulo").value;
-  const descricao = document.getElementById("descricao").value;
-
-  // Criar novo card com status "Aberto"
-  const card = document.createElement("div");
-  card.classList.add("card");
-  card.innerHTML = `
-    <h3>${titulo}</h3>
-    <p><strong>Descrição:</strong> ${descricao}</p>
-    <p class="status aberto">Status: Aberto</p>
-  `;
-
-  chamadosContainer.appendChild(card);
-
-  // Fechar modal e resetar formulário
-  modal.style.display = "none";
-  formChamado.reset();
-});
-
 const btnVerMais = document.querySelector(".btn-ver-mais");
 
 // Função para atualizar visibilidade dos cards
@@ -69,7 +46,7 @@ function atualizarCards() {
   // Se houver mais de 3 cards, exibe o botão
   if (cards.length > 3) {
     btnVerMais.style.display = "inline-block";
-    btnVerMais.textContent = "Ver mais ↓";
+    btnVerMais.textContent = "Ver mais";
   } else {
     btnVerMais.style.display = "none";
   }
@@ -86,7 +63,7 @@ btnVerMais.addEventListener("click", () => {
     document
       .querySelectorAll(".chamados .card")
       .forEach((card) => card.classList.remove("hidden"));
-    btnVerMais.textContent = "Ver menos ↑";
+    btnVerMais.textContent = "Ver menos";
   } else {
     // Oculta novamente os cards extras
     atualizarCards();

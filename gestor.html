@@ -1,18 +1,55 @@
 <!DOCTYPE html>
-<html>
+<html lang="pt-br">
   <head>
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <title>Page Title</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link
-      rel="stylesheet"
-      type="text/css"
-      media="screen"
-      href="./css/gestor.css"
-    />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Gestão</title>
+    <link rel="stylesheet" href="./css/gestor.css" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   </head>
   <body>
+    <!-- Header -->
+
+    <header class="header">
+      <h1>Gestão</h1>
+      <button class="menu-btn">&#9776;</button>
+    </header>
+
+    <main class="container">
+      <div class="cards">
+        <div class="card">
+          <p>Chamados Abertos</p>
+          <h2 id="chamadosAbertos">--</h2>
+        </div>
+        <div class="card">
+          <p>Chamados em Atraso</p>
+          <h2 id="chamadosAtraso">--</h2>
+        </div>
+        <div class="card">
+          <p>Tempo Médio de Atendimento</p>
+          <h2 id="tempoMedio">--</h2>
+        </div>
+        <div class="card">
+          <p>Chamados por Prioridade</p>
+          <h2 id="chamadosPrioridade">--</h2>
+        </div>
+      </div>
+
+      <section class="grafico-section">
+        <div class="grafico-header">
+          <h3>Chamados por Categoria</h3>
+          <div class="filtros">
+            <input type="date" id="dataInicial" />
+            <input type="date" id="dataFinal" />
+            <button id="filtrarBtn">Filtrar</button>
+          </div>
+        </div>
+        <canvas id="graficoChamados"></canvas>
+      </section>
+    </main>
+
+    <!-- Scripts -->
+
     <script src="./JavaScript/gestor.js"></script>
   </body>
 </html>

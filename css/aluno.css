@@ -120,14 +120,27 @@ body {
 .status {
   margin-top: 8px;
   font-weight: bold;
+  color: #000; /* "Status:" sempre preto */
 }
 
-.status.aberto {
+.estado {
+  font-weight: normal;
+  margin-left: 4px;
+}
+
+.estado.aberto {
   color: #d9534f;
+  font-weight: bold; /* Vermelho */
 }
 
-.status.andamento {
+.estado.andamento {
   color: #f0ad4e;
+  font-weight: bold; /* Amarelo */
+}
+
+.estado.finalizado {
+  color: #28a745;
+  font-weight: bold; /* Verde */
 }
 
 .btn-ver-mais {

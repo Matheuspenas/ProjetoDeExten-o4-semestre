@@ -79,11 +79,12 @@ formChamado.addEventListener("submit", (e) => {
 
   const card = document.createElement("div");
   card.classList.add("card");
-  card.innerHTML = `
-    <h3>${titulo}</h3>
-    <p><strong>Descrição:</strong> ${descricao}</p>
-    <p class="status aberto">Status: Aberto</p>
-  `;
+card.innerHTML = `
+  <h3>${titulo}</h3>
+  <p><strong>Descrição:</strong> ${descricao}</p>
+  <p class="status"><strong>Status:</strong> <span class="estado aberto">Aberto</span></p>
+`;
+
 
   chamadosContainer.appendChild(card);
 

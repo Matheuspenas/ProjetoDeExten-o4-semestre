@@ -32,42 +32,81 @@ h1 {
   color: #1d2d50;
 }
 
-/* Inputs */
+/* Grupo de inputs */
 .input-group {
   margin-bottom: 20px;
   text-align: left;
+  position: relative;
 }
 
+/* Label */
 label {
   display: block;
-  margin-bottom: 5px;
-  color: #333;
-  font-size: 14px;
+  color: #1d2d50;
+  font-size: 15px;
+  margin-bottom: 8px;
+  font-weight: 600;
 }
 
-input {
-  width: 100%;
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  font-size: 14px;
-}
-
+/* Inputs e Select */
 input,
 select {
   width: 100%;
-  padding: 10px;
-  border: 1px solid #ccc;
+  padding: 10px 12px;
+  border: 2px solid #5a8dee; /* azul claro */
   border-radius: 8px;
   font-size: 14px;
-}
-
-select {
+  outline: none;
+  transition: all 0.3s ease;
   background-color: #fff;
-  color: #333;
+  box-sizing: border-box;
 }
 
-/* Botões */
+/* Foco */
+input:focus,
+select:focus {
+  border-color: #1d2d50;
+  box-shadow: 0 0 6px rgba(29, 45, 80, 0.3);
+}
+
+/* Select customizado */
+select {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background-color: #f7f9ff;
+  color: #1d2d50;
+  background-image: linear-gradient(45deg, transparent 50%, #1d4ed8 50%),
+    linear-gradient(135deg, #1d4ed8 50%, transparent 50%);
+  background-position: calc(100% - 18px) center, calc(100% - 13px) center;
+  background-size: 5px 5px, 5px 5px;
+  background-repeat: no-repeat;
+  cursor: pointer;
+}
+
+select::-ms-expand {
+  display: none;
+}
+
+/* Fundo azul quando aberto (lista de opções) */
+select option {
+  background-color: #f7f9ff;
+  color: #1d2d50;
+}
+
+/* Opção selecionada */
+select option:checked {
+  background-color: #1d4ed8;
+  color: #fff;
+}
+
+/* Opção ao passar o mouse */
+select option:hover {
+  background-color: #5a8dee;
+  color: white;
+}
+
+/* Botão principal */
 .btn-login {
   width: 100%;
   background-color: #1d4ed8;
@@ -83,6 +122,8 @@ select {
 .btn-login:hover {
   background-color: #153eab;
 }
+
+/* Botão secundário */
 
 button.btn-secondary,
 a.btn-secondary {
@@ -107,6 +148,7 @@ a.btn-secondary:hover {
 }
 
 /* Links */
+
 .link {
   display: block;
   margin-top: 15px;
@@ -120,6 +162,7 @@ a.btn-secondary:hover {
 }
 
 /* Rodapé */
+
 footer {
   margin-top: 25px;
   font-size: 12px;

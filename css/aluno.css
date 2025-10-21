@@ -98,6 +98,13 @@ body {
   align-items: center;
 }
 
+.sem-chamados {
+  color: #1d2d50;
+  font-weight: bold;
+  font-size: 1.1rem;
+  margin-top: 20px;
+}
+
 .card {
   width: 90%;
   background: white;

@@ -13,6 +13,15 @@ const spanClose = document.querySelector(".close");
 const formChamado = document.getElementById("formChamado");
 const chamadosContainer = document.querySelector(".chamados");
 
+// Criar elemento da mensagem "Não há chamados"
+let semChamados = document.querySelector(".sem-chamados");
+if (!semChamados) {
+  semChamados = document.createElement("p");
+  semChamados.classList.add("sem-chamados");
+  semChamados.textContent = "Não há chamados no momento";
+  chamadosContainer.appendChild(semChamados);
+}
+
 // Abrir modal
 btnNovo.addEventListener("click", () => {
   modal.style.display = "block";
@@ -32,23 +41,23 @@ window.addEventListener("click", (e) => {
 
 const btnVerMais = document.querySelector(".btn-ver-mais");
 
-// Função para atualizar visibilidade dos cards
+// Função para atualizar visibilidade dos cards e da mensagem
 function atualizarCards() {
   const cards = document.querySelectorAll(".chamados .card");
-  cards.forEach((card, index) => {
-    if (index > 2) {
-      card.classList.add("hidden");
-    } else {
-      card.classList.remove("hidden");
-    }
-  });
 
-  // Se houver mais de 3 cards, exibe o botão
-  if (cards.length > 3) {
-    btnVerMais.style.display = "inline-block";
-    btnVerMais.textContent = "Ver mais";
-  } else {
+  if (cards.length === 0) {
+    semChamados.style.display = "block";
     btnVerMais.style.display = "none";
+  } else {
+    semChamados.style.display = "none";
+
+    cards.forEach((card, index) => {
+      if (index > 2) card.classList.add("hidden");
+      else card.classList.remove("hidden");
+    });
+
+    btnVerMais.style.display = cards.length > 3 ? "inline-block" : "none";
+    btnVerMais.textContent = "Ver mais";
   }
 }
 
@@ -57,15 +66,13 @@ atualizarCards();
 
 // Toggle "Ver mais"
 btnVerMais.addEventListener("click", () => {
-  const cards = document.querySelectorAll(".chamados .card.hidden");
-  if (cards.length > 0) {
-    // Revela todos os cards ocultos
+  const cardsOcultos = document.querySelectorAll(".chamados .card.hidden");
+  if (cardsOcultos.length > 0) {
     document
       .querySelectorAll(".chamados .card")
       .forEach((card) => card.classList.remove("hidden"));
     btnVerMais.textContent = "Ver menos";
   } else {
-    // Oculta novamente os cards extras
     atualizarCards();
   }
 });
@@ -79,18 +86,15 @@ formChamado.addEventListener("submit", (e) => {
 
   const card = document.createElement("div");
   card.classList.add("card");
-card.innerHTML = `
-  <h3>${titulo}</h3>
-  <p><strong>Descrição:</strong> ${descricao}</p>
-  <p class="status"><strong>Status:</strong> <span class="estado aberto">Aberto</span></p>
-`;
-
+  card.innerHTML = `
+    <h3>${titulo}</h3>
+    <p><strong>Descrição:</strong> ${descricao}</p>
+    <p class="status"><strong>Status:</strong> <span class="estado aberto">Aberto</span></p>
+  `;
 
   chamadosContainer.appendChild(card);
-
   modal.style.display = "none";
   formChamado.reset();
 
-  // Atualiza visibilidade dos cards após adicionar
   atualizarCards();
 });

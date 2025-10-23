@@ -13,7 +13,32 @@
 
     <main class="container">
       <h2>Chamados Abertos</h2>
+
+      <!-- filtros -->
+      <div class="filtros">
+        <select id="filtro-status">
+          <option value="">Filtrar por Status</option>
+          <option value="Aberto">Aberto</option>
+          <option value="Em andamento">Em andamento</option>
+          <option value="Finalizado">Finalizado</option>
+        </select>
+
+        <select id="filtro-prioridade">
+          <option value="">Filtrar por Prioridade</option>
+          <option value="Baixa">Baixa</option>
+          <option value="Média">Média</option>
+          <option value="Alta">Alta</option>
+          <option value="Urgente">Urgente</option>
+        </select>
+      </div>
+
       <div class="lista-chamados"></div>
+      <p
+        class="sem-chamados"
+        style="text-align: center; color: blue; display: none"
+      >
+        Não há chamados abertos
+      </p>
     </main>
 
     <footer>© Universidade – Service Desk 2025</footer>

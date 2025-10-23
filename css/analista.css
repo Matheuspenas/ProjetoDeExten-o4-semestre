@@ -78,7 +78,7 @@ body {
 
 h2 {
   text-align: center;
-  color: #1e63e9;
+  color: #1d2d50;
   margin-bottom: 20px;
 }
 
@@ -116,6 +116,13 @@ label {
   color: #1d2d50;
 }
 
+/* Foco */
+input:focus,
+select:focus {
+  border-color: #1d2d50;
+  box-shadow: 0 0 6px rgba(29, 45, 80, 0.3);
+}
+
 select {
   width: 100%;
   padding: 8px;
@@ -148,4 +155,27 @@ footer {
   font-size: 12px;
   color: #777;
   padding: 10px 0;
+}
+
+/* estilização dos filtros*/
+.filtros {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin-bottom: 25px;
+}
+
+.filtros select {
+  background-color: #fff;
+  color: #174eb9;
+  border: 1px solid #fff;
+  border-radius: 8px;
+  padding: 8px 12px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.filtros select:hover {
+  border-color: #174eb9;
 }

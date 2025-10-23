@@ -1,4 +1,7 @@
 const listaChamados = document.querySelector(".lista-chamados");
+const filtroStatus = document.getElementById("filtro-status");
+const filtroPrioridade = document.getElementById("filtro-prioridade");
+const semChamados = document.querySelector(".sem-chamados");
 
 // Carrega chamados do localStorage
 function carregarChamados() {
@@ -6,9 +9,11 @@ function carregarChamados() {
   listaChamados.innerHTML = "";
 
   if (chamados.length === 0) {
-    listaChamados.innerHTML = "<p>Não há chamados abertos</p>";
+    semChamados.style.display = "block";
     return;
   }
+
+  semChamados.style.display = "none";
 
   chamados.forEach((c) => {
     const card = document.createElement("div");
@@ -37,7 +42,9 @@ function carregarChamados() {
         <option ${
           c.status === "Em andamento" ? "selected" : ""
         }>Em andamento</option>
-        <option ${c.status === "Finalizado" ? "selected" : ""}>Finalizado</option>
+        <option ${
+          c.status === "Finalizado" ? "selected" : ""
+        }>Finalizado</option>
       </select>
 
       <button class="btn-salvar">Salvar Alterações</button>
@@ -49,6 +56,9 @@ function carregarChamados() {
 
     listaChamados.appendChild(card);
   });
+
+  // Aplica filtros ao carregar para não mostrar cards que não correspondem
+  aplicarFiltros();
 }
 
 // Atualiza o chamado no localStorage
@@ -73,4 +83,35 @@ function atualizarChamado(id, card) {
   }
 }
 
+// Filtros
+filtroStatus.addEventListener("change", aplicarFiltros);
+filtroPrioridade.addEventListener("change", aplicarFiltros);
+
+function aplicarFiltros() {
+  const statusSelecionado = filtroStatus.value;
+  const prioridadeSelecionada = filtroPrioridade.value;
+
+  const cards = document.querySelectorAll(".lista-chamados .card");
+  let algumVisivel = false;
+
+  cards.forEach((card) => {
+    const status = card.querySelector(".select-status").value;
+    const prioridade = card.querySelector(".select-prioridade").value;
+
+    const combinaStatus = !statusSelecionado || status === statusSelecionado;
+    const combinaPrioridade =
+      !prioridadeSelecionada || prioridade === prioridadeSelecionada;
+
+    if (combinaStatus && combinaPrioridade) {
+      card.style.display = "block";
+      algumVisivel = true;
+    } else {
+      card.style.display = "none";
+    }
+  });
+
+  semChamados.style.display = algumVisivel ? "none" : "block";
+}
+
+// Inicializa
 carregarChamados();

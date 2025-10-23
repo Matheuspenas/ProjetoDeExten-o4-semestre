@@ -16,6 +16,12 @@ function carregarChamados() {
     card.innerHTML = `
       <h3>${c.titulo}</h3>
       <p><strong>Descrição:</strong> ${c.descricao}</p>
+      <p><strong>Criado em:</strong> ${c.criadoEm || "—"}</p>
+      ${
+        c.atualizadoEm
+          ? `<p><strong>Última atualização:</strong> ${c.atualizadoEm}</p>`
+          : ""
+      }
 
       <label>Prioridade:</label>
       <select class="select-prioridade">
@@ -31,9 +37,7 @@ function carregarChamados() {
         <option ${
           c.status === "Em andamento" ? "selected" : ""
         }>Em andamento</option>
-        <option ${
-          c.status === "Finalizado" ? "selected" : ""
-        }>Finalizado</option>
+        <option ${c.status === "Finalizado" ? "selected" : ""}>Finalizado</option>
       </select>
 
       <button class="btn-salvar">Salvar Alterações</button>
@@ -55,8 +59,17 @@ function atualizarChamado(id, card) {
   if (chamado) {
     chamado.prioridade = card.querySelector(".select-prioridade").value;
     chamado.status = card.querySelector(".select-status").value;
+
+    // Atualiza data/hora da última modificação
+    const agora = new Date();
+    chamado.atualizadoEm = agora.toLocaleString("pt-BR", {
+      dateStyle: "short",
+      timeStyle: "short",
+    });
+
     localStorage.setItem("chamados", JSON.stringify(chamados));
     alert("Chamado atualizado com sucesso!");
+    carregarChamados();
   }
 }
 

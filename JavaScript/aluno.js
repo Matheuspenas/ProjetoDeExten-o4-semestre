@@ -59,6 +59,12 @@ function carregarChamados() {
       card.innerHTML = `
         <h3>${c.titulo}</h3>
         <p><strong>Descrição:</strong> ${c.descricao}</p>
+        <p><strong>Criado em:</strong> ${c.criadoEm}</p>
+        ${
+          c.atualizadoEm
+            ? `<p><strong>Última atualização:</strong> ${c.atualizadoEm}</p>`
+            : ""
+        }
         <p><strong>Prioridade:</strong> ${c.prioridade}</p>
         <p class="status"><strong>Status:</strong>
           <span class="estado ${c.status.toLowerCase().replace(" ", "-")}">${
@@ -78,6 +84,13 @@ formChamado.addEventListener("submit", (e) => {
   const titulo = document.getElementById("titulo").value;
   const descricao = document.getElementById("descricao").value;
 
+  // Gera data e hora automática
+  const agora = new Date();
+  const dataHora = agora.toLocaleString("pt-BR", {
+    dateStyle: "short",
+    timeStyle: "short",
+  });
+
   const chamados = JSON.parse(localStorage.getItem("chamados")) || [];
   const novoChamado = {
     id: Date.now(),
@@ -85,6 +98,8 @@ formChamado.addEventListener("submit", (e) => {
     descricao,
     status: "Aberto",
     prioridade: "Baixa",
+    criadoEm: dataHora,
+    atualizadoEm: null,
   };
 
   chamados.push(novoChamado);

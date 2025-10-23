@@ -140,7 +140,7 @@ body {
   font-weight: bold; /* Vermelho */
 }
 
-.estado.andamento {
+.estado.em-andamento {
   color: #f0ad4e;
   font-weight: bold; /* Amarelo */
 }

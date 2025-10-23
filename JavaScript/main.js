@@ -26,13 +26,19 @@ document.addEventListener("DOMContentLoaded", function () {
       return;
     }
 
-    // Direciona o usuário conforme o escolhido no selct
-    if (tipo === "gestor") {
-      window.location.href = "./gestor.html";
-    } else if (tipo === "aluno") {
-      window.location.href = "./aluno.html";
-    } else {
-      alert("Selecione um tipo de usuário válido.");
+    // Redirecionamento conforme tipo de usuário
+    switch (tipo) {
+      case "gestor":
+        window.location.href = "./gestor.html";
+        break;
+      case "aluno":
+        window.location.href = "./aluno.html";
+        break;
+      case "analista":
+        window.location.href = "./analista.html";
+        break;
+      default:
+        alert("Selecione um tipo de usuário válido.");
     }
   });
 });

@@ -1,100 +1,99 @@
-// Script simples para abrir/fechar o menu
-const toggle = document.getElementById("menu-toggle");
-const menu = document.getElementById("menu");
-
-toggle.addEventListener("click", () => {
-  menu.classList.toggle("open");
-});
-
-// Selecionando elementos
+// Seletores principais
 const modal = document.getElementById("modal");
 const btnNovo = document.querySelector(".btn-novo");
 const spanClose = document.querySelector(".close");
 const formChamado = document.getElementById("formChamado");
 const chamadosContainer = document.querySelector(".chamados");
-
-// Criar elemento da mensagem "Não há chamados"
-let semChamados = document.querySelector(".sem-chamados");
-if (!semChamados) {
-  semChamados = document.createElement("p");
-  semChamados.classList.add("sem-chamados");
-  semChamados.textContent = "Não há chamados no momento";
-  chamadosContainer.appendChild(semChamados);
-}
-
-// Abrir modal
-btnNovo.addEventListener("click", () => {
-  modal.style.display = "block";
-});
-
-// Fechar modal
-spanClose.addEventListener("click", () => {
-  modal.style.display = "none";
-});
-
-// Fechar clicando fora do modal
-window.addEventListener("click", (e) => {
-  if (e.target === modal) {
-    modal.style.display = "none";
-  }
-});
-
+const semChamados = document.querySelector(".sem-chamados");
 const btnVerMais = document.querySelector(".btn-ver-mais");
 
-// Função para atualizar visibilidade dos cards e da mensagem
+// Abrir e fechar modal
+btnNovo.addEventListener("click", () => (modal.style.display = "block"));
+spanClose.addEventListener("click", () => (modal.style.display = "none"));
+window.addEventListener("click", (e) => {
+  if (e.target === modal) modal.style.display = "none";
+});
+
+// Função para atualizar visibilidade de cards
 function atualizarCards() {
   const cards = document.querySelectorAll(".chamados .card");
-
   if (cards.length === 0) {
     semChamados.style.display = "block";
     btnVerMais.style.display = "none";
   } else {
     semChamados.style.display = "none";
-
     cards.forEach((card, index) => {
       if (index > 2) card.classList.add("hidden");
       else card.classList.remove("hidden");
     });
-
     btnVerMais.style.display = cards.length > 3 ? "inline-block" : "none";
     btnVerMais.textContent = "Ver mais";
   }
 }
 
-// Inicializa a exibição
-atualizarCards();
-
-// Toggle "Ver mais"
+// Alternar entre ver mais e ver menos
 btnVerMais.addEventListener("click", () => {
-  const cardsOcultos = document.querySelectorAll(".chamados .card.hidden");
-  if (cardsOcultos.length > 0) {
+  const ocultos = document.querySelectorAll(".card.hidden");
+  if (ocultos.length > 0) {
     document
-      .querySelectorAll(".chamados .card")
-      .forEach((card) => card.classList.remove("hidden"));
+      .querySelectorAll(".card")
+      .forEach((c) => c.classList.remove("hidden"));
     btnVerMais.textContent = "Ver menos";
   } else {
     atualizarCards();
   }
 });
 
-// Cadastro de novo chamado
+// Carregar chamados do localStorage
+function carregarChamados() {
+  const chamados = JSON.parse(localStorage.getItem("chamados")) || [];
+  chamadosContainer.innerHTML = "";
+
+  if (chamados.length === 0) {
+    semChamados.style.display = "block";
+  } else {
+    semChamados.style.display = "none";
+    chamados.forEach((c) => {
+      const card = document.createElement("div");
+      card.classList.add("card");
+      card.innerHTML = `
+        <h3>${c.titulo}</h3>
+        <p><strong>Descrição:</strong> ${c.descricao}</p>
+        <p><strong>Prioridade:</strong> ${c.prioridade}</p>
+        <p class="status"><strong>Status:</strong>
+          <span class="estado ${c.status.toLowerCase().replace(" ", "-")}">${
+        c.status
+      }</span>
+        </p>
+      `;
+      chamadosContainer.appendChild(card);
+    });
+  }
+  atualizarCards();
+}
+
+// Adicionar novo chamado
 formChamado.addEventListener("submit", (e) => {
   e.preventDefault();
-
   const titulo = document.getElementById("titulo").value;
   const descricao = document.getElementById("descricao").value;
 
-  const card = document.createElement("div");
-  card.classList.add("card");
-  card.innerHTML = `
-    <h3>${titulo}</h3>
-    <p><strong>Descrição:</strong> ${descricao}</p>
-    <p class="status"><strong>Status:</strong> <span class="estado aberto">Aberto</span></p>
-  `;
+  const chamados = JSON.parse(localStorage.getItem("chamados")) || [];
+  const novoChamado = {
+    id: Date.now(),
+    titulo,
+    descricao,
+    status: "Aberto",
+    prioridade: "Baixa",
+  };
 
-  chamadosContainer.appendChild(card);
-  modal.style.display = "none";
+  chamados.push(novoChamado);
+  localStorage.setItem("chamados", JSON.stringify(chamados));
+
   formChamado.reset();
-
-  atualizarCards();
+  modal.style.display = "none";
+  carregarChamados();
 });
+
+// Inicialização
+carregarChamados();

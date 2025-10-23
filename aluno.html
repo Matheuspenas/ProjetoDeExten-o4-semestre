@@ -3,23 +3,13 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Tela de Solicitação</title>
+    <title>Tela do Aluno</title>
     <link rel="stylesheet" href="./css/aluno.css" />
   </head>
   <body>
     <header class="header">
-      <h1>Solicitação</h1>
-      <div class="menu-icon" id="menu-toggle">&#9776;</div>
+      <h1>Solicitação de Chamados</h1>
     </header>
-
-    <nav class="menu" id="menu">
-      <ul>
-        <li><a href="#">Início</a></li>
-        <li><a href="#">Perfil</a></li>
-        <li><a href="#">Configurações</a></li>
-        <li><a href="#">Sair</a></li>
-      </ul>
-    </nav>
 
     <main class="container">
       <button class="btn-novo">+ Abrir Novo Chamado</button>
@@ -30,11 +20,10 @@
 
       <button class="btn-ver-mais">Ver mais</button>
 
-      <!-- Modal -->
+      <!-- Modal de Novo Chamado -->
       <div id="modal" class="modal">
         <div class="modal-content">
           <span class="close">&times;</span>
-          <img src="./img/icone.png" alt="Logo da Universidade" class="logo" />
           <h2>Novo Chamado</h2>
           <form id="formChamado">
             <label for="titulo">Título:</label>

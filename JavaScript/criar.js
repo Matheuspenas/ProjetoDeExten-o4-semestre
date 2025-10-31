@@ -34,6 +34,12 @@ document.addEventListener("DOMContentLoaded", function () {
       return;
     }
 
+    // Verficação do tamanho máximo da senha (12 digitos)
+    if (senha.length > 12) {
+      alert("A senha deve ter no máximo 12 caracteres.");
+      return;
+    }
+
     // Mostra o modal de sucesso
     mensagemModal.textContent = `Bem-vindo(a), ${nome}! Sua conta foi criada com sucesso.`;
     modal.style.display = "flex";

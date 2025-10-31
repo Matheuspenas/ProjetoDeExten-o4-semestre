@@ -19,6 +19,10 @@ body {
   font-size: large;
 }
 
+.recuperar h1 {
+  color: #1d2d50;
+}
+
 .form_recuperar {
   display: flex;
   flex-direction: column;

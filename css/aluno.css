@@ -169,6 +169,10 @@ body.dark-mode strong {
   color: white;
 }
 
+body.dark-mode footer {
+  background: linear-gradient(to right, #0a1a3a, #1e2f60, #334b80);
+  color: #e0e0e0;
+}
 
 .container {
   text-align: center;

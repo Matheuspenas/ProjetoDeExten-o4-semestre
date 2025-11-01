@@ -3,32 +3,26 @@ document.addEventListener("DOMContentLoaded", function () {
   const btnLogin = document.querySelector(".btn-login");
 
   btnLogin.addEventListener("click", function () {
-    const email = document.getElementById("email").value.trim();
+    const email = document.getElementById("email").value.trim().toLowerCase(); // Convertendo para minúsculas
     const senha = document.getElementById("senha").value.trim();
-    const tipo = document.getElementById("tipo").value;
 
-    // Verifica se todos os campos foram preenchidos
-    if (!email || !senha || !tipo) {
+    let tipo = null;
+
+    // Verificação de credenciais e determinação do tipo (apenas para teste)
+    if (email === "gestor@universidade.com" && senha === "senha123") {
+      tipo = "gestor";
+    } else if (email === "aluno@universidade.com" && senha === "senha123") {
+      tipo = "aluno";
+    } else if (email === "analista@universidade.com" && senha === "senha123") {
+      tipo = "analista";
+    } else {
+      alert("Email ou senha incorretos.");
+      return;
+    }
+
+    // Verifica se os campos de email e senha foram preenchidos
+    if (!email || !senha) {
       alert("Por favor, preencha todos os campos para continuar.");
-      return;
-    }
-
-    // Verifica se p email e valido
-    const emailValido = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailValido.test(email)) {
-      alert("Por favor, insira um e-mail válido.");
-      return;
-    }
-
-    // Verficação do tamanho minimo da senha (6 digitos)
-    if (senha.length < 6) {
-      alert("A senha deve ter no minimo 6 caracteres.");
-      return;
-    }
-
-    // Verficação do tamanho máximo da senha (12 digitos)
-    if (senha.length > 12) {
-      alert("A senha deve ter no máximo 12 caracteres.");
       return;
     }
 
@@ -44,7 +38,7 @@ document.addEventListener("DOMContentLoaded", function () {
         window.location.href = "./analista.html";
         break;
       default:
-        alert("Selecione um tipo de usuário válido.");
+        alert("O tipo de usuário não foi definido corretamente.");
     }
   });
 });

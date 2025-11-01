@@ -6,6 +6,11 @@ const formChamado = document.getElementById("formChamado");
 const chamadosContainer = document.querySelector(".chamados");
 const semChamados = document.querySelector(".sem-chamados");
 const btnVerMais = document.querySelector(".btn-ver-mais");
+const darkModeToggle = document.getElementById("darkModeToggle");
+
+darkModeToggle.addEventListener("change", () => {
+  document.body.classList.toggle("dark-mode", darkModeToggle.checked);
+});
 
 // Abrir e fechar modal
 btnNovo.addEventListener("click", () => (modal.style.display = "block"));

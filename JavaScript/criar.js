@@ -40,6 +40,14 @@ document.addEventListener("DOMContentLoaded", function () {
       return;
     }
 
+    const senhaForte = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).+$/;
+    if (!senhaForte.test(senha)) {
+      alert(
+        "A senha deve conter pelo menos uma letra maiúscula, uma minúscula, um número e um caractere especial."
+      );
+      return;
+    }
+
     // Mostra o modal de sucesso
     mensagemModal.textContent = `Bem-vindo(a), ${nome}! Sua conta foi criada com sucesso.`;
     modal.style.display = "flex";

@@ -1,3 +1,4 @@
+/* GERAIS */
 * {
   margin: 0;
   padding: 0;
@@ -6,88 +7,142 @@
 }
 
 body {
-  background: #f5f7fa;
+  background: #f5f7fa; /* Fundo Light Mode */
   color: #222;
+  transition: background-color 0.3s, color 0.3s; /* Adicionado para transição */
 }
 
-/* HEADER COM DEGRADÊ AZUL */
-.header {
+/* --- NAVBAR FIXA (Substituindo o .header) --- */
+.navbar-fixa {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
   background: linear-gradient(to right, #0a3c9a, #1e63e9, #66a3ff);
   color: #fff;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  z-index: 1000;
+  padding: 12px 0;
+}
+
+.navbar-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 12px 20px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
-.header h1 {
-  font-size: 1.2rem;
+.navbar-fixa h1 {
+  font-size: 1.5rem;
   margin: 0;
 }
 
-.menu-icon {
-  font-size: 1.6rem;
-  cursor: pointer;
-  transition: transform 0.3s ease;
-}
-
-.menu-icon:hover {
-  transform: scale(1.1);
-}
-
-/* MENU LATERAL COM DEGRADÊ COMPATÍVEL */
-.menu {
-  position: fixed;
-  top: 0;
-  right: -220px;
-  width: 200px;
-  height: 100%;
-  background: linear-gradient(to bottom, #0a3c9a, #1e63e9, #66a3ff);
-  color: white;
-  transition: right 0.3s ease;
-  padding-top: 70px;
-}
-
-.menu ul {
+/* Links da Navegação */
+.nav-links {
   list-style: none;
+  display: flex;
+  margin: 0;
   padding: 0;
 }
 
-.menu ul li {
-  margin: 20px 0;
-  text-align: center;
+.nav-links li {
+  margin-left: 25px;
 }
 
-.menu ul li a {
-  color: white;
+.nav-links a {
   text-decoration: none;
-  font-size: 1rem;
-  transition: color 0.2s ease;
+  color: #fff;
+  font-weight: 500;
+  padding: 5px 0;
+  transition: color 0.3s, border-bottom 0.3s;
 }
 
-.menu ul li a:hover {
+.nav-links a:hover {
   color: #cce0ff;
+  border-bottom: 2px solid #cce0ff;
 }
 
-.menu.show {
+/* Botão Dark Mode (Inserido no lugar do menu-btn) */
+.toggle-switch {
+  position: relative;
+  width: 50px;
+  height: 26px;
+  margin-left: 10px;
+  /* Garante que o switch fique visível mesmo quando os links estão ocultos */
+}
+
+.toggle-switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.switch {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
   right: 0;
+  bottom: 0;
+  background-color: #1e63e9;
+  border-radius: 30px;
+  transition: background-color 0.3s ease;
 }
 
+.switch::before {
+  position: absolute;
+  content: "";
+  height: 20px;
+  width: 20px;
+  left: 3px;
+  bottom: 3px;
+  background-color: white;
+  border-radius: 50%;
+  transition: transform 0.3s ease;
+}
+
+input:checked + .switch {
+  background-color: #1e63e9;
+}
+
+input:checked + .switch::before {
+  transform: translateX(24px);
+}
+/* Fim do Toggle Switch */
+
+/* Botão de Menu (hamburguer) - MANTIDO PARA RESPONSIVIDADE, MAS SUBSTITUÍDO VISUALMENTE */
+.menu-btn {
+  background: none;
+  border: none;
+  color: #fff;
+  font-size: 1.8rem;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+  /* OCULTO EM DESKTOP (JÁ ESTÁ AUSENTE NO HTML, MAS O CSS É MANTIDO POR PRECAUÇÃO) */
+  display: none;
+}
+
+/* AJUSTE DO CONTEÚDO PRINCIPAL PARA BARRA FIXA */
 .container {
-  padding: 20px;
+  padding-top: 70px;
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-bottom: 20px;
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 25px;
 }
 
+/* --- SEÇÃO CARDS DE INDICADORES --- */
 .cards {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
   gap: 15px;
   width: 100%;
-  max-width: 600px;
+  max-width: 900px;
 }
 
 .card {
@@ -96,7 +151,7 @@ body {
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
   padding: 15px;
   text-align: center;
-  transition: transform 0.2s;
+  transition: transform 0.2s, background 0.3s, box-shadow 0.3s; /* Adicionado transição */
 }
 
 .card:hover {
@@ -106,6 +161,7 @@ body {
 .card p {
   color: #444;
   font-size: 14px;
+  transition: color 0.3s;
 }
 
 .card h2 {
@@ -113,13 +169,15 @@ body {
   margin-top: 5px;
 }
 
+/* --- SEÇÃO GRÁFICO PRINCIPAL --- */
 .grafico-section {
   background: #fff;
   border-radius: 14px;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
   padding: 20px;
   width: 100%;
-  max-width: 700px;
+  max-width: 900px;
+  transition: background 0.3s, box-shadow 0.3s;
 }
 
 .grafico-header {
@@ -135,6 +193,7 @@ body {
   color: #1d2d50;
   font-weight: 600;
   font-size: large;
+  transition: color 0.3s;
 }
 
 .filtros {
@@ -147,6 +206,7 @@ body {
   padding: 8px 10px;
   border: 1px solid #ccc;
   border-radius: 6px;
+  transition: background-color 0.3s, border-color 0.3s, color 0.3s;
 }
 
 .filtros button {
@@ -161,7 +221,7 @@ body {
   background: #0037cc;
 }
 
-/* Gráficos de rosca */
+/* --- SEÇÃO GRÁFICOS DE ROSCA --- */
 .graficos-rosca {
   background: #fff;
   border-radius: 14px;
@@ -170,6 +230,7 @@ body {
   width: 100%;
   max-width: 900px;
   text-align: center;
+  transition: background 0.3s, box-shadow 0.3s;
 }
 
 .graficos-rosca h3 {
@@ -177,15 +238,17 @@ body {
   color: #1d2d50;
   font-weight: 600;
   font-size: large;
+  transition: color 0.3s;
 }
 
 .rosca-container {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
   gap: 25px;
 }
 
 .rosca-card {
+  /* ESTILO ORIGINAL PRESERVADO: Degradê claro */
   background: linear-gradient(180deg, #f8f9ff, #eef3ff);
   border-radius: 12px;
   padding: 15px;
@@ -201,6 +264,7 @@ body {
   margin-bottom: 10px;
   font-size: 15px;
   color: #1d2d50;
+  transition: color 0.3s;
 }
 
 .rosca-container canvas {
@@ -213,6 +277,7 @@ body {
   margin-top: 10px;
   font-size: 13px;
   color: #555;
+  transition: color 0.3s;
 }
 
 .cor {
@@ -239,15 +304,16 @@ body {
   background: #d0d0d0;
 }
 
-/* --- Seção de Gestão de Pessoas --- */
+/* --- SEÇÃO GESTÃO DE PESSOAS E TABELAS --- */
 .gestao-pessoas {
   background: #fff;
   border-radius: 14px;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
   padding: 20px;
   width: 100%;
-  max-width: 900px; /* Alinha com a largura dos gráficos de rosca */
-  margin-top: 25px; /* Espaçamento da seção anterior */
+  max-width: 900px;
+  margin-top: 25px;
+  transition: background 0.3s, box-shadow 0.3s;
 }
 
 .gestao-pessoas h3 {
@@ -257,43 +323,45 @@ body {
   font-size: large;
   border-bottom: 2px solid #e0e0e0;
   padding-bottom: 10px;
+  transition: color 0.3s, border-color 0.3s;
 }
 
 .tabelas-container {
   display: flex;
-  flex-wrap: wrap; /* Permite que as tabelas quebrem em telas menores */
+  flex-wrap: wrap;
   gap: 20px;
   justify-content: center;
 }
 
 .tabela-analistas,
 .tabela-usuarios {
-  flex: 1 1 400px; /* Flexível, mas com largura mínima de 400px */
+  flex: 1 1 400px;
   min-width: 300px;
 }
 
 .tabela-analistas h4,
 .tabela-usuarios h4 {
-  background-color: #f0f5ff; /* Fundo suave azulado */
+  background-color: #f0f5ff;
   color: #1d2d50;
   padding: 10px;
   border-radius: 8px 8px 0 0;
   font-size: 1.1rem;
   font-weight: 600;
   margin-bottom: 0;
+  transition: background-color 0.3s, color 0.3s;
 }
 
 /* Estilo da Tabela */
 #tabelaAnalistas,
 #tabelaUsuarios {
   width: 100%;
-  border-collapse: collapse; /* Remove espaçamento entre células */
+  border-collapse: collapse;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 }
 
 #tabelaAnalistas thead tr,
 #tabelaUsuarios thead tr {
-  background-color: #0a3c9a; /* Cor principal da faculdade */
+  background-color: #0a3c9a;
   color: white;
   text-align: left;
 }
@@ -304,27 +372,135 @@ body {
 #tabelaUsuarios td {
   padding: 12px 15px;
   border: 1px solid #e0e0e0;
+  transition: background-color 0.3s, color 0.3s, border-color 0.3s;
 }
 
 #tabelaAnalistas tbody tr:nth-child(even),
 #tabelaUsuarios tbody tr:nth-child(even) {
-  background-color: #f8f8f8; /* Listras para melhor leitura */
+  background-color: #f8f8f8;
 }
 
 #tabelaAnalistas tbody tr:hover,
 #tabelaUsuarios tbody tr:hover {
-  background-color: #e6f7ff; /* Destaque ao passar o mouse */
+  background-color: #e6f7ff;
   cursor: default;
 }
 
-/* --- Responsividade Adicional para Tabelas --- */
-@media (max-width: 768px) {
-  .tabelas-container {
-    flex-direction: column; /* Empilha as tabelas em telas pequenas */
-  }
+/* --- DARK MODE RULES --- */
+/* Esta seção só é ativada quando a classe 'dark-mode' é aplicada ao <body> */
+body.dark-mode {
+  background-color: #121212;
+  color: #e0e0e0;
+}
 
-  .tabela-analistas,
-  .tabela-usuarios {
-    margin-bottom: 20px;
+/* Navbar */
+body.dark-mode .navbar-fixa {
+  background: linear-gradient(to right, #0a1a3a, #1e2f60, #334b80);
+}
+
+/* Elementos de fundo branco (Cards, Seções) */
+body.dark-mode .card,
+body.dark-mode .grafico-section,
+body.dark-mode .graficos-rosca,
+body.dark-mode .gestao-pessoas {
+  background: #1e1e1e;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+}
+
+/* Texto em Cards e Títulos de Seções */
+body.dark-mode .card p,
+body.dark-mode .legenda {
+  color: #ccc;
+}
+body.dark-mode .grafico-header h3,
+body.dark-mode .graficos-rosca h3,
+body.dark-mode .gestao-pessoas h3,
+body.dark-mode .rosca-card h4 {
+  color: #e0e0e0;
+}
+
+/* Cards de Rosca (CORREÇÃO FINAL: Fundo escuro sólido para substituir o degradê claro) */
+body.dark-mode .rosca-card {
+  background: #282828;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+}
+
+/* Filtros */
+body.dark-mode .filtros input {
+  background-color: #333;
+  color: #e0e0e0;
+  border: 1px solid #555;
+}
+
+body.dark-mode .filtros button {
+  background: #1e63e9;
+  color: #fff;
+}
+body.dark-mode .filtros button:hover {
+  background: #174eb9;
+}
+
+/* Tabelas */
+body.dark-mode .tabela-analistas h4,
+body.dark-mode .tabela-usuarios h4 {
+  background-color: #282828;
+  color: #e0e0e0;
+}
+
+body.dark-mode #tabelaAnalistas thead tr,
+body.dark-mode #tabelaUsuarios thead tr {
+  background-color: #0a1a3a;
+}
+
+body.dark-mode #tabelaAnalistas th,
+body.dark-mode #tabelaUsuarios th,
+body.dark-mode #tabelaAnalistas td,
+body.dark-mode #tabelaUsuarios td {
+  border-color: #333;
+  color: #e0e0e0;
+}
+
+/* Listras em Dark Mode */
+body.dark-mode #tabelaAnalistas tbody tr:nth-child(even),
+body.dark-mode #tabelaUsuarios tbody tr:nth-child(even) {
+  background-color: #1e1e1e;
+}
+body.dark-mode #tabelaAnalistas tbody tr:nth-child(odd),
+body.dark-mode #tabelaUsuarios tbody tr:nth-child(odd) {
+  background-color: #282828;
+}
+
+body.dark-mode #tabelaAnalistas tbody tr:hover,
+body.dark-mode #tabelaUsuarios tbody tr:hover {
+  background-color: #333;
+}
+
+/* --- RESPONSIVIDADE (Ajustes para mobile) --- */
+@media (max-width: 768px) {
+  /* Substituindo o menu-btn pelo toggle-switch */
+  .nav-links {
+    display: none;
+  }
+  /* O toggle-switch já é flexível o suficiente para não precisar de regras específicas aqui */
+
+  /* (Restante do media query original...) */
+  .container {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+  .tabelas-container {
+    flex-direction: column;
+  }
+  .grafico-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .filtros {
+    width: 100%;
+    justify-content: space-between;
+  }
+  .filtros input,
+  .filtros button {
+    flex-grow: 1;
   }
 }

@@ -9,18 +9,28 @@
 
     <link rel="stylesheet" href="./css/gestor.css" />
     <link rel="stylesheet" href="./css/footer.css" />
+    <link rel="stylesheet" href="./css/navbar.css" />
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   </head>
   <body>
-    <!-- Header -->
+    <nav class="navbar-fixa">
+      <div class="navbar-container">
+        <h1>Gestão</h1>
+        <ul class="nav-links">
+          <li><a href="#inicio">Início</a></li>
+          <li><a href="#indicadores">Indicadores</a></li>
+          <li><a href="#equipe">Equipe</a></li>
+        </ul>
 
-    <header class="header">
-      <h1>Gestão</h1>
-      <button class="menu-btn">&#9776;</button>
-    </header>
+        <div class="toggle-switch">
+          <input type="checkbox" id="darkModeToggle" />
+          <label for="darkModeToggle" class="switch"></label>
+        </div>
+      </div>
+    </nav>
 
     <main class="container">
-      <div class="cards">
+      <div class="cards" id="inicio">
         <div class="card">
           <p>Chamados Abertos</p>
           <h2 id="chamadosAbertos">--</h2>
@@ -39,7 +49,7 @@
         </div>
       </div>
 
-      <section class="grafico-section">
+      <section class="grafico-section" id="categorias">
         <div class="grafico-header">
           <h3>Chamados por Categoria</h3>
           <div class="filtros">
@@ -51,8 +61,7 @@
         <canvas id="graficoChamados"></canvas>
       </section>
 
-      <!-- Gráficos de rosca -->
-      <section class="graficos-rosca">
+      <section class="graficos-rosca" id="indicadores">
         <h3>Visão Geral dos Indicadores</h3>
 
         <div class="rosca-container">
@@ -94,7 +103,7 @@
         </div>
       </section>
 
-      <section class="gestao-pessoas">
+      <section class="gestao-pessoas" id="equipe">
         <h3>Gestão de Pessoas e Equipe</h3>
 
         <div class="tabelas-container">
@@ -130,8 +139,6 @@
         </div>
       </section>
     </main>
-
-    <!-- Scripts -->
 
     <script src="./JavaScript/gestor.js"></script>
   </body>

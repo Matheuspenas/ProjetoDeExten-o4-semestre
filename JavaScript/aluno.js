@@ -32,7 +32,7 @@ function atualizarCards() {
       else card.classList.remove("hidden");
     });
     btnVerMais.style.display = cards.length > 3 ? "inline-block" : "none";
-    btnVerMais.textContent = "Ver mais";
+    btnVerMais.textContent = "Ver menos";
   }
 }
 
@@ -46,6 +46,7 @@ btnVerMais.addEventListener("click", () => {
     btnVerMais.textContent = "Ver menos";
   } else {
     atualizarCards();
+    btnVerMais.textContent = "Ver mais";
   }
 });
 
@@ -58,11 +59,16 @@ function carregarChamados() {
     semChamados.style.display = "block";
   } else {
     semChamados.style.display = "none";
-    chamados.forEach((c) => {
+    const chamadosReversos = chamados.slice().reverse();
+
+    chamadosReversos.forEach((c) => {
       const card = document.createElement("div");
       card.classList.add("card");
       card.innerHTML = `
         <h3>${c.titulo}</h3>
+        <p><strong>Tipo de Solicitação:</strong> ${
+          c.tipo || "Não Informado"
+        }</p>
         <p><strong>Descrição:</strong> ${c.descricao}</p>
         <p><strong>Criado em:</strong> ${c.criadoEm}</p>
         ${
@@ -87,6 +93,8 @@ function carregarChamados() {
 formChamado.addEventListener("submit", (e) => {
   e.preventDefault();
   const titulo = document.getElementById("titulo").value;
+  // Renomeado de 'departamento' para 'tipo'
+  const tipo = document.getElementById("tipo").value;
   const descricao = document.getElementById("descricao").value;
 
   // Gera data e hora automática
@@ -100,6 +108,7 @@ formChamado.addEventListener("submit", (e) => {
   const novoChamado = {
     id: Date.now(),
     titulo,
+    tipo, // Renomeado de 'departamento' para 'tipo'
     descricao,
     status: "Aberto",
     prioridade: "Baixa",

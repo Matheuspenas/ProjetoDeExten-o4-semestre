@@ -1,6 +1,8 @@
 const listaChamados = document.querySelector(".lista-chamados");
 const filtroStatus = document.getElementById("filtro-status");
 const filtroPrioridade = document.getElementById("filtro-prioridade");
+// Renomeado para 'filtroTipo' e ID HTML para 'filtro-tipo'
+const filtroTipo = document.getElementById("filtro-tipo");
 const semChamados = document.querySelector(".sem-chamados");
 
 // Carrega chamados do localStorage
@@ -17,10 +19,12 @@ function carregarChamados() {
 
   chamados.forEach((c) => {
     const card = document.createElement("div");
+    card.id = `chamado-${c.id}`;
     card.classList.add("card");
     card.innerHTML = `
       <h3>${c.titulo}</h3>
       <p><strong>Descrição:</strong> ${c.descricao}</p>
+      <p><strong>Tipo de Solicitação:</strong> ${c.tipo || "Não Informado"}</p>
       <p><strong>Criado em:</strong> ${c.criadoEm || "—"}</p>
       ${
         c.atualizadoEm
@@ -57,7 +61,7 @@ function carregarChamados() {
     listaChamados.appendChild(card);
   });
 
-  // Aplica filtros ao carregar para não mostrar cards que não correspondem
+  // Aplica filtros ao carregar
   aplicarFiltros();
 }
 
@@ -86,11 +90,16 @@ function atualizarChamado(id, card) {
 // Filtros
 filtroStatus.addEventListener("change", aplicarFiltros);
 filtroPrioridade.addEventListener("change", aplicarFiltros);
+// Renomeado o listener para 'filtroTipo'
+filtroTipo.addEventListener("change", aplicarFiltros);
 
 function aplicarFiltros() {
   const statusSelecionado = filtroStatus.value;
   const prioridadeSelecionada = filtroPrioridade.value;
+  // Renomeado para 'tipoSolicitacaoSelecionada'
+  const tipoSolicitacaoSelecionada = filtroTipo.value;
 
+  const chamados = JSON.parse(localStorage.getItem("chamados")) || [];
   const cards = document.querySelectorAll(".lista-chamados .card");
   let algumVisivel = false;
 
@@ -98,11 +107,20 @@ function aplicarFiltros() {
     const status = card.querySelector(".select-status").value;
     const prioridade = card.querySelector(".select-prioridade").value;
 
+    const idChamado = parseInt(card.id.replace("chamado-", ""));
+    const chamadoOriginal = chamados.find((c) => c.id === idChamado);
+    // Obtém o tipo do objeto salvo
+    const tipo = chamadoOriginal ? chamadoOriginal.tipo : "";
+
     const combinaStatus = !statusSelecionado || status === statusSelecionado;
     const combinaPrioridade =
       !prioridadeSelecionada || prioridade === prioridadeSelecionada;
+    // Renomeado para 'combinaTipo'
+    const combinaTipo =
+      !tipoSolicitacaoSelecionada || tipo === tipoSolicitacaoSelecionada;
 
-    if (combinaStatus && combinaPrioridade) {
+    // Combina as 3 condições (Status, Prioridade, Tipo)
+    if (combinaStatus && combinaPrioridade && combinaTipo) {
       card.style.display = "block";
       algumVisivel = true;
     } else {

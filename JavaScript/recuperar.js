@@ -16,12 +16,15 @@ document
       return;
     }
 
+    const linkRedefinicao = `https://seudominio.com/redefinir-senha?email=${encodeURIComponent(
+      emailusuario
+    )}`;
+
     const params = {
-      emailusuario: emailusuario, // deve ser o mesmo nome do template
+      emailusuario: emailusuario, // destinatário (To Email)
+      email: emailusuario, // aparece no texto do e-mail
+      link: linkRedefinicao, // usado dentro do corpo do e-mail
       from_name: "Central de Serviço TI",
-      message: `Olá! Clique no link abaixo para redefinir sua senha:\n\nhttps://seudominio.com/redefinir-senha?email=${encodeURIComponent(
-        emailusuario
-      )}`,
     };
 
     emailjs

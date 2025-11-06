@@ -1,12 +1,28 @@
 /* Estilos gerais */
 body {
   font-family: Arial, sans-serif;
-  background-color: #f4f6f8;
+  background-image: url(/img/banner_cst.png);
+  background-repeat: no-repeat;
+  background-attachment: fixed;
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100vh;
   margin: 0;
+  position: relative;
+}
+
+/* Faixa diagonal moderna */
+body::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    135deg,
+    rgba(29, 78, 216, 0.9) 0%,
+    transparent 40%
+  );
+  z-index: 0;
 }
 
 /* Container principal */
@@ -15,9 +31,26 @@ body {
   width: 380px;
   padding: 40px 30px;
   border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
   text-align: center;
+  position: relative;
+  z-index: 1; /* mantém o formulário sobre a faixa */
 }
+
+/* Logo */
+.logo {
+  width: 60px;
+  margin-bottom: 15px;
+}
+
+/* Título */
+h1 {
+  font-size: 22px;
+  margin-bottom: 30px;
+  color: #1d2d50;
+}
+
+/* Inputs e botões permanecem iguais */
 
 /* Logo */
 .logo {

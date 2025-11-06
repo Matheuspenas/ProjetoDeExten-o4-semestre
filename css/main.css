@@ -1,7 +1,7 @@
 /* Estilos gerais */
 body {
   font-family: Arial, sans-serif;
-  background-image: url(./img/banner_cst.png);
+  background-image: url(../img/banner_cst.png);
   background-repeat: no-repeat;
   background-attachment: fixed;
   display: flex;

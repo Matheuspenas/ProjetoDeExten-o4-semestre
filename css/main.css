@@ -82,8 +82,7 @@ label {
 }
 
 /* Inputs e Select */
-input,
-select {
+input {
   width: 100%;
   padding: 10px 12px;
   border: 2px solid #5a8dee; /* azul claro */
@@ -96,47 +95,9 @@ select {
 }
 
 /* Foco */
-input:focus,
-select:focus {
+input:focus {
   border-color: #1d2d50;
   box-shadow: 0 0 6px rgba(29, 45, 80, 0.3);
-}
-
-/* Select customizado */
-select {
-  appearance: none;
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  background-color: #f7f9ff;
-  color: #1d2d50;
-  background-image: linear-gradient(45deg, transparent 50%, #1d4ed8 50%),
-    linear-gradient(135deg, #1d4ed8 50%, transparent 50%);
-  background-position: calc(100% - 18px) center, calc(100% - 13px) center;
-  background-size: 5px 5px, 5px 5px;
-  background-repeat: no-repeat;
-  cursor: pointer;
-}
-
-select::-ms-expand {
-  display: none;
-}
-
-/* Fundo azul quando aberto (lista de opções) */
-select option {
-  background-color: #f7f9ff;
-  color: #1d2d50;
-}
-
-/* Opção selecionada */
-select option:checked {
-  background-color: #1d4ed8;
-  color: #fff;
-}
-
-/* Opção ao passar o mouse */
-select option:hover {
-  background-color: #5a8dee;
-  color: white;
 }
 
 /* Botão principal */
@@ -200,4 +161,117 @@ footer {
   margin-top: 25px;
   font-size: 12px;
   color: #777;
+}
+
+/* Responsividade */
+
+/* Tablets */
+@media (max-width: 992px) {
+  body {
+    background-size: cover;
+    background-position: center;
+    background-attachment: scroll;
+    height: 100vh;
+  }
+
+  .login-container {
+    width: 320px;
+    padding: 30px 25px;
+  }
+
+  h1 {
+    font-size: 20px;
+  }
+
+  label {
+    font-size: 14px;
+  }
+
+  input,
+  select {
+    font-size: 13px;
+    padding: 9px 10px;
+  }
+
+  .btn-login,
+  .btn-secondary {
+    font-size: 15px;
+    padding: 10px;
+  }
+}
+
+/* Celulares grandes */
+@media (max-width: 768px) {
+  body {
+    background-image: url(../img/Atendimento\ no\ Centro\ de\ TI.png);
+    background-repeat: no-repeat;
+    background-size: cover; /* cobre toda a tela */
+    background-position: center;
+    background-attachment: fixed;
+    height: 100vh;
+  }
+
+  .login-container {
+    width: 280px;
+    padding: 25px 20px;
+  }
+
+  .logo {
+    width: 50px;
+    margin-bottom: 10px;
+  }
+
+  h1 {
+    font-size: 18px;
+    margin-bottom: 20px;
+  }
+
+  .btn-login,
+  .btn-secondary {
+    font-size: 14px;
+    padding: 9px;
+  }
+}
+
+/* Celulares pequenos  */
+@media (max-width: 480px) {
+  body {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-image: url(../img/Atendimento\ no\ Centro\ de\ TI.png);
+    background-repeat: no-repeat;
+    background-size: cover; /* cobre tudo */
+    background-position: center;
+    background-attachment: scroll;
+    height: 100vh;
+    margin: 0;
+  }
+
+  .login-container {
+    width: 90%;
+    max-width: 260px;
+    padding: 20px 15px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  h1 {
+    font-size: 17px;
+  }
+
+  input,
+  select {
+    font-size: 13px;
+    padding: 8px;
+  }
+
+  .btn-login,
+  .btn-secondary {
+    font-size: 13px;
+    padding: 12px;
+  }
+
+  footer {
+    font-size: 11px;
+  }
 }

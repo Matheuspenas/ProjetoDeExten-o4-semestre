@@ -122,6 +122,11 @@ async function carregarChamados() {
           <p><strong>Criado em:</strong> ${new Date(c.criado_em).toLocaleString(
             "pt-BR"
           )}</p>
+          <p><strong>Última atualização:</strong> ${
+            c.atualizado_em
+              ? new Date(c.atualizado_em).toLocaleString("pt-BR")
+              : "—"
+          }</p>
         `;
         chamadosContainer.appendChild(card);
       });
@@ -171,7 +176,7 @@ formChamado.addEventListener("submit", async (e) => {
         tipo,
         descricao,
         status: "Aberto",
-        prioridade: "Não definida", // valor padrão aqui também
+        prioridade: "Não definida",
         usuario_id,
       }),
     });

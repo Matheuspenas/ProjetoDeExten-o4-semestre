@@ -1,15 +1,13 @@
-// ================================
 // CONFIGURAÇÕES DO SUPABASE
-// ================================
+
 const SUPABASE_URL = "https://ilnilousfwignxliyjqv.supabase.co";
 const SUPABASE_KEY =
   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imlsbmlsb3VzZndpZ254bGl5anF2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjI0NjIzMTAsImV4cCI6MjA3ODAzODMxMH0.c2TTA1Mk7wu2SGYk7sZrY4mMp-O2PATcuRCIKUsRCpQ";
 
 const TABLE_NAME = "chamados";
 
-// ================================
 // ELEMENTOS DA PÁGINA
-// ================================
+
 const modal = document.getElementById("modal");
 const btnNovo = document.querySelector(".btn-novo");
 const spanClose = document.querySelector(".close");
@@ -19,25 +17,22 @@ const semChamados = document.querySelector(".sem-chamados");
 const btnVerMais = document.querySelector(".btn-ver-mais");
 const darkModeToggle = document.getElementById("darkModeToggle");
 
-// ================================
 // MODO ESCURO
-// ================================
+
 darkModeToggle.addEventListener("change", () => {
   document.body.classList.toggle("dark-mode", darkModeToggle.checked);
 });
 
-// ================================
 // MODAL
-// ================================
+
 btnNovo.addEventListener("click", () => (modal.style.display = "block"));
 spanClose.addEventListener("click", () => (modal.style.display = "none"));
 window.addEventListener("click", (e) => {
   if (e.target === modal) modal.style.display = "none";
 });
 
-// ================================
 // FUNÇÃO: ATUALIZAR VISUALIZAÇÃO
-// ================================
+
 function atualizarCards() {
   const cards = document.querySelectorAll(".chamados .card");
   if (cards.length === 0) {
@@ -54,9 +49,8 @@ function atualizarCards() {
   }
 }
 
-// ================================
 // BOTÃO VER MAIS / VER MENOS
-// ================================
+
 btnVerMais.addEventListener("click", () => {
   const ocultos = document.querySelectorAll(".card.hidden");
   if (ocultos.length > 0) {
@@ -70,9 +64,8 @@ btnVerMais.addEventListener("click", () => {
   }
 });
 
-// ================================
 // FUNÇÃO: CARREGAR CHAMADOS DO BANCO
-// ================================
+
 async function carregarChamados() {
   try {
     const usuarioLogado = JSON.parse(localStorage.getItem("usuarioLogado"));
@@ -111,13 +104,21 @@ async function carregarChamados() {
       );
 
       chamadosOrdenados.forEach((c) => {
+        // Define a cor do status conforme o valor
+        let statusClass = "";
+        if (c.status === "Aberto") statusClass = "aberto";
+        else if (c.status === "Em andamento") statusClass = "em-andamento";
+        else if (c.status === "Finalizado") statusClass = "finalizado";
+
         const card = document.createElement("div");
         card.classList.add("card");
         card.innerHTML = `
           <h3>${c.titulo}</h3>
           <p><strong>Tipo:</strong> ${c.tipo || "Não informado"}</p>
           <p><strong>Descrição:</strong> ${c.descricao}</p>
-          <p><strong>Status:</strong> ${c.status}</p>
+          <p class="status"><strong>Status:</strong> <span class="estado ${statusClass}">${
+          c.status
+        }</span></p>
           <p><strong>Prioridade:</strong> ${c.prioridade}</p>
           <p><strong>Criado em:</strong> ${new Date(c.criado_em).toLocaleString(
             "pt-BR"
@@ -138,9 +139,8 @@ async function carregarChamados() {
   }
 }
 
-// ================================
 // FUNÇÃO: CADASTRAR NOVO CHAMADO
-// ================================
+
 formChamado.addEventListener("submit", async (e) => {
   e.preventDefault();
 
@@ -198,7 +198,6 @@ formChamado.addEventListener("submit", async (e) => {
   }
 });
 
-// ================================
 // INICIALIZAÇÃO
-// ================================
+
 carregarChamados();

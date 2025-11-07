@@ -6,7 +6,6 @@
     <title>Gestão</title>
 
     <link rel="icon" href="./img/icone.png" type="image/x-icon" />
-
     <link rel="stylesheet" href="./css/gestor.css" />
     <link rel="stylesheet" href="./css/footer.css" />
     <link rel="stylesheet" href="./css/navbar.css" />
@@ -30,6 +29,7 @@
     </nav>
 
     <main class="container">
+      <!-- CARDS -->
       <div class="cards" id="inicio">
         <div class="card">
           <p>Chamados Abertos</p>
@@ -49,9 +49,10 @@
         </div>
       </div>
 
-      <section class="grafico-section" id="categorias">
+      <!-- GRÁFICO PRINCIPAL -->
+      <section class="grafico-section" id="tipos">
         <div class="grafico-header">
-          <h3>Chamados por Categoria</h3>
+          <h3>Chamados por Tipo de Solicitação</h3>
           <div class="filtros">
             <input type="date" id="dataInicial" />
             <input type="date" id="dataFinal" />
@@ -61,6 +62,7 @@
         <canvas id="graficoChamados"></canvas>
       </section>
 
+      <!-- GRÁFICOS DE ROSCA -->
       <section class="graficos-rosca" id="indicadores">
         <h3>Visão Geral dos Indicadores</h3>
 
@@ -103,6 +105,7 @@
         </div>
       </section>
 
+      <!-- TABELAS -->
       <section class="gestao-pessoas" id="equipe">
         <h3>Gestão de Pessoas e Equipe</h3>
 
@@ -129,7 +132,7 @@
                 <tr>
                   <th>ID</th>
                   <th>Nome</th>
-                  <th>Departamento</th>
+                  <th>Total de Chamados</th>
                   <th>Último Chamado</th>
                 </tr>
               </thead>

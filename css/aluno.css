@@ -158,11 +158,37 @@ body.dark-mode .modal-content {
   color: #e0e0e0;
 }
 
+body.dark-mode .modal-content h2 {
+  color: #1e63e9;
+}
+
+body.dark-mode .modal-content label {
+  color: #1e63e9;
+}
+
 body.dark-mode input,
+body.dark-mode select,
 body.dark-mode textarea {
   background-color: #333;
   color: #e0e0e0;
   border: 2px solid #555;
+}
+
+body.dark-mode .modal-content select option {
+  background: #1e1e1e;
+  color: #ffffff;
+}
+
+/* Opção selecionada */
+body.dark-mode .modal-content select option:checked {
+  background-color: #1d2d50;
+  color: #fff;
+}
+
+/* Opção ao passar o mouse */
+body.dark-mode .modal-content select option:hover {
+  background-color: #5a8dee;
+  color: white;
 }
 
 body.dark-mode strong {

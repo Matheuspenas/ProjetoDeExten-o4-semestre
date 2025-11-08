@@ -4,7 +4,6 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Gestão</title>
-
     <link rel="icon" href="./img/icone.png" type="image/x-icon" />
     <link rel="stylesheet" href="./css/gestor.css" />
     <link rel="stylesheet" href="./css/footer.css" />
@@ -20,7 +19,6 @@
           <li><a href="#indicadores">Indicadores</a></li>
           <li><a href="#equipe">Equipe</a></li>
         </ul>
-
         <div class="toggle-switch">
           <input type="checkbox" id="darkModeToggle" />
           <label for="darkModeToggle" class="switch"></label>
@@ -29,27 +27,25 @@
     </nav>
 
     <main class="container">
-      <!-- CARDS -->
       <div class="cards" id="inicio">
         <div class="card">
           <p>Chamados Abertos</p>
           <h2 id="chamadosAbertos">--</h2>
         </div>
         <div class="card">
-          <p>Chamados em Atraso</p>
-          <h2 id="chamadosAtraso">--</h2>
+          <p>Chamados Finalizados</p>
+          <h2 id="chamadosFinalizados">--</h2>
         </div>
         <div class="card">
-          <p>Tempo Médio de Atendimento</p>
-          <h2 id="tempoMedio">--</h2>
+          <p>Chamados em Andamento</p>
+          <h2 id="chamadosAndamento">--</h2>
         </div>
         <div class="card">
-          <p>Chamados por Prioridade</p>
+          <p>Chamados Prioritários</p>
           <h2 id="chamadosPrioridade">--</h2>
         </div>
       </div>
 
-      <!-- GRÁFICO PRINCIPAL -->
       <section class="grafico-section" id="tipos">
         <div class="grafico-header">
           <h3>Chamados por Tipo de Solicitação</h3>
@@ -62,53 +58,30 @@
         <canvas id="graficoChamados"></canvas>
       </section>
 
-      <!-- GRÁFICOS DE ROSCA -->
       <section class="graficos-rosca" id="indicadores">
         <h3>Visão Geral dos Indicadores</h3>
-
         <div class="rosca-container">
           <div class="rosca-card">
-            <h4>Chamados Abertos</h4>
+            <h4>Abertos</h4>
             <canvas id="roscaAbertos"></canvas>
-            <div class="legenda">
-              <span class="cor cor-azul"></span> Concluído
-              <span class="cor cor-cinza"></span> Restante
-            </div>
           </div>
-
           <div class="rosca-card">
-            <h4>Chamados em Atraso</h4>
-            <canvas id="roscaAtraso"></canvas>
-            <div class="legenda">
-              <span class="cor cor-vermelha"></span> Concluído
-              <span class="cor cor-cinza"></span> Restante
-            </div>
+            <h4>Finalizados</h4>
+            <canvas id="roscaFinalizados"></canvas>
           </div>
-
           <div class="rosca-card">
-            <h4>Tempo Médio (Horas)</h4>
-            <canvas id="roscaTempo"></canvas>
-            <div class="legenda">
-              <span class="cor cor-laranja"></span> Concluído
-              <span class="cor cor-cinza"></span> Restante
-            </div>
+            <h4>Em Andamento</h4>
+            <canvas id="roscaAndamento"></canvas>
           </div>
-
           <div class="rosca-card">
-            <h4>Chamados Prioritários</h4>
+            <h4>Prioritários</h4>
             <canvas id="roscaPrioridade"></canvas>
-            <div class="legenda">
-              <span class="cor cor-celeste"></span> Concluído
-              <span class="cor cor-cinza"></span> Restante
-            </div>
           </div>
         </div>
       </section>
 
-      <!-- TABELAS -->
       <section class="gestao-pessoas" id="equipe">
         <h3>Gestão de Pessoas e Equipe</h3>
-
         <div class="tabelas-container">
           <div class="tabela-analistas">
             <h4>Analistas de Suporte</h4>
@@ -117,22 +90,21 @@
                 <tr>
                   <th>ID</th>
                   <th>Nome</th>
-                  <th>Status (Carga)</th>
+                  <th>Status</th>
                   <th>Chamados Ativos</th>
                 </tr>
               </thead>
               <tbody></tbody>
             </table>
           </div>
-
           <div class="tabela-usuarios">
-            <h4>Usuários Cadastrados (Clientes)</h4>
+            <h4>Usuários Cadastrados</h4>
             <table id="tabelaUsuarios">
               <thead>
                 <tr>
                   <th>ID</th>
                   <th>Nome</th>
-                  <th>Total de Chamados</th>
+                  <th>Total Chamados</th>
                   <th>Último Chamado</th>
                 </tr>
               </thead>
@@ -142,7 +114,6 @@
         </div>
       </section>
     </main>
-
     <script src="./JavaScript/gestor.js"></script>
   </body>
 </html>

@@ -64,7 +64,7 @@ async function carregarChamados() {
 
       card.innerHTML = `
         <h3>${c.titulo}</h3>
-        <p><strong>Aluno:</strong> ${
+        <p><strong>Usuario:</strong> ${
           c.usuario_id ? c.usuario_id.nome + " " + c.usuario_id.sobrenome : "—"
         }</p>
         <p><strong>Descrição:</strong> ${c.descricao}</p>

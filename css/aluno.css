@@ -298,6 +298,11 @@ body.dark-mode footer {
 }
 
 /* Modal geral */
+
+body.modal-open {
+  overflow: hidden;
+}
+
 .modal {
   display: none; /* inicialmente escondido */
   position: fixed;
@@ -308,6 +313,7 @@ body.dark-mode footer {
   height: 100%;
   overflow: auto;
   background-color: rgba(0, 0, 0, 0.5);
+  overflow: hidden;
 }
 
 /* Conteúdo do modal */
@@ -406,6 +412,13 @@ select option:hover {
   font-weight: bold;
   color: #1d2d50;
   display: flex;
+}
+
+.modal-content textarea {
+  resize: vertical;
+  min-height: 100px;
+  max-height: 200px;
+  overflow-y: auto;
 }
 
 /* Botão de enviar */

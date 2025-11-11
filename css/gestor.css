@@ -7,9 +7,9 @@
 }
 
 body {
-  background: #f5f7fa; /* Fundo Light Mode */
+  background: #f5f7fa; 
   color: #222;
-  transition: background-color 0.3s, color 0.3s; /* Adicionado para transição */
+  transition: background-color 0.3s, color 0.3s; 
 }
 
 /* --- NAVBAR FIXA (Substituindo o .header) --- */
@@ -70,7 +70,6 @@ body {
   width: 50px;
   height: 26px;
   margin-left: 10px;
-  /* Garante que o switch fique visível mesmo quando os links estão ocultos */
 }
 
 .toggle-switch input {
@@ -110,7 +109,6 @@ input:checked + .switch {
 input:checked + .switch::before {
   transform: translateX(24px);
 }
-/* Fim do Toggle Switch */
 
 /* Botão de Menu (hamburguer) - MANTIDO PARA RESPONSIVIDADE, MAS SUBSTITUÍDO VISUALMENTE */
 .menu-btn {
@@ -120,7 +118,6 @@ input:checked + .switch::before {
   font-size: 1.8rem;
   cursor: pointer;
   transition: transform 0.3s ease;
-  /* OCULTO EM DESKTOP (JÁ ESTÁ AUSENTE NO HTML, MAS O CSS É MANTIDO POR PRECAUÇÃO) */
   display: none;
 }
 
@@ -248,7 +245,6 @@ input:checked + .switch::before {
 }
 
 .rosca-card {
-  /* ESTILO ORIGINAL PRESERVADO: Degradê claro */
   background: linear-gradient(180deg, #f8f9ff, #eef3ff);
   border-radius: 12px;
   padding: 15px;
@@ -272,13 +268,6 @@ input:checked + .switch::before {
   margin: auto;
 }
 
-/* Legendas */
-.legenda {
-  margin-top: 10px;
-  font-size: 13px;
-  color: #555;
-  transition: color 0.3s;
-}
 
 .cor {
   display: inline-block;
@@ -419,7 +408,7 @@ body.dark-mode .rosca-card h4 {
   color: #e0e0e0;
 }
 
-/* Cards de Rosca (CORREÇÃO FINAL: Fundo escuro sólido para substituir o degradê claro) */
+/* Cards de Rosca (Fundo escuro sólido para substituir o degradê claro) */
 body.dark-mode .rosca-card {
   background: #282828;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
@@ -477,13 +466,9 @@ body.dark-mode #tabelaUsuarios tbody tr:hover {
 
 /* --- RESPONSIVIDADE (Ajustes para mobile) --- */
 @media (max-width: 768px) {
-  /* Substituindo o menu-btn pelo toggle-switch */
   .nav-links {
     display: none;
   }
-  /* O toggle-switch já é flexível o suficiente para não precisar de regras específicas aqui */
-
-  /* (Restante do media query original...) */
   .container {
     padding-left: 10px;
     padding-right: 10px;

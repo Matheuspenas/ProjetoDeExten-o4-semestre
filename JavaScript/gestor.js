@@ -1,6 +1,4 @@
-// =======================================================================
 // VARIÁVEIS GLOBAIS
-// =======================================================================
 const darkModeToggle = document.getElementById("darkModeToggle");
 let chartInstance;
 let roscaInstances = [];
@@ -19,9 +17,8 @@ const TIPOS_CHAMADOS = [
   "Outro",
 ];
 
-// =======================================================================
+
 // DARK MODE
-// =======================================================================
 function getColors() {
   const isDark = document.body.classList.contains("dark-mode");
   return {
@@ -59,9 +56,8 @@ function atualizarEstiloGraficos() {
   roscaInstances.forEach((rosca) => rosca.update());
 }
 
-// =======================================================================
+
 // PLUGIN TEXTO CENTRAL
-// =======================================================================
 const textoCentral = {
   id: "textoCentral",
   beforeDraw(chart, args, options) {
@@ -79,9 +75,8 @@ const textoCentral = {
   },
 };
 
-// =======================================================================
+
 // FUNÇÃO ROSCA
-// =======================================================================
 function criarGraficoRosca(id, valor, total, cor, unidade = "") {
   const ctx = document.getElementById(id).getContext("2d");
   const restante = Math.max(total - valor, 0);
@@ -117,9 +112,8 @@ function criarGraficoRosca(id, valor, total, cor, unidade = "") {
   roscaInstances.push(newChart);
 }
 
-// =======================================================================
+
 // FUNÇÃO PRINCIPAL
-// =======================================================================
 async function atualizarTudoBanco() {
   try {
     const [respUsuarios, respChamados] = await Promise.all([
@@ -147,9 +141,8 @@ async function atualizarTudoBanco() {
     const chamados = await respChamados.json();
     const norm = (v) => (v ? v.trim().toLowerCase() : "");
 
-    // ===============================
+
     // CONTADORES PRINCIPAIS
-    // ===============================
     const abertos = chamados.filter((c) => norm(c.status) === "aberto").length;
     const finalizados = chamados.filter(
       (c) => norm(c.status) === "finalizado"
@@ -169,17 +162,13 @@ async function atualizarTudoBanco() {
     document.getElementById("chamadosAndamento").textContent = andamento;
     document.getElementById("chamadosPrioridade").textContent = prioridade;
 
-    // ===============================
     // ROSCAS
-    // ===============================
     criarGraficoRosca("roscaAbertos", abertos, 50, "#0047ff");
     criarGraficoRosca("roscaFinalizados", finalizados, 50, "#00c853");
     criarGraficoRosca("roscaAndamento", andamento, 50, "#ffa726");
     criarGraficoRosca("roscaPrioridade", prioridade, 50, "#42a5f5");
 
-    // ===============================
     // GRÁFICO PRINCIPAL
-    // ===============================
     const dadosTipo = TIPOS_CHAMADOS.map(
       (t) =>
         chamados.filter((c) =>
@@ -193,9 +182,7 @@ async function atualizarTudoBanco() {
     chartInstance.data.datasets[0].data = dadosTipo;
     chartInstance.update();
 
-    // ===============================
     // TABELA ANALISTAS
-    // ===============================
     const analistas = usuarios.filter((u) => norm(u.cargo) === "analista");
     const tbodyA = document.querySelector("#tabelaAnalistas tbody");
     tbodyA.innerHTML = "";
@@ -208,9 +195,8 @@ async function atualizarTudoBanco() {
       tbodyA.appendChild(tr);
     });
 
-    // ===============================
+
     // TABELA ALUNOS
-    // ===============================
     const alunos = usuarios.filter((u) => norm(u.cargo) === "aluno");
     const tbodyU = document.querySelector("#tabelaUsuarios tbody");
     tbodyU.innerHTML = "";
@@ -228,9 +214,7 @@ async function atualizarTudoBanco() {
   }
 }
 
-// =======================================================================
 // INICIALIZAÇÃO
-// =======================================================================
 document.addEventListener("DOMContentLoaded", () => {
   aplicarTemaSalvo();
   const ctx = document.getElementById("graficoChamados").getContext("2d");

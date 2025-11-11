@@ -1,27 +1,44 @@
-// ================================
-// CONFIGURAÇÕES DO SUPABASE
-// ================================
 const SUPABASE_URL = "https://ilnilousfwignxliyjqv.supabase.co";
 const SUPABASE_KEY =
   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imlsbmlsb3VzZndpZ254bGl5anF2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjI0NjIzMTAsImV4cCI6MjA3ODAzODMxMH0.c2TTA1Mk7wu2SGYk7sZrY4mMp-O2PATcuRCIKUsRCpQ";
-
 const TABLE_NAME = "chamados";
 
-// ================================
-// ELEMENTOS DA PÁGINA
-// ================================
 const listaChamados = document.querySelector(".lista-chamados");
 const filtroStatus = document.getElementById("filtro-status");
 const filtroPrioridade = document.getElementById("filtro-prioridade");
 const filtroTipo = document.getElementById("filtro-tipo");
 const semChamados = document.querySelector(".sem-chamados");
 
-// ================================
-// FUNÇÃO: CARREGAR CHAMADOS DO SUPABASE
-// ================================
+const darkModeToggle = document.getElementById("darkModeToggle");
+const userIcon = document.getElementById("userIcon");
+const userDropdown = document.getElementById("userDropdown");
+const userName = document.getElementById("userName");
+const userEmail = document.getElementById("userEmail");
+const btnLogout = document.getElementById("btnLogout");
+
+darkModeToggle.addEventListener("change", () => {
+  document.body.classList.toggle("dark-mode", darkModeToggle.checked);
+});
+
+userIcon.addEventListener("click", () => {
+  userDropdown.classList.toggle("show");
+  carregarUsuario();
+});
+
+btnLogout.addEventListener("click", () => {
+  localStorage.removeItem("usuarioLogado");
+  window.location.href = "./index.html";
+});
+
+function carregarUsuario() {
+  const usuarioLogado = JSON.parse(localStorage.getItem("usuarioLogado"));
+  if (!usuarioLogado) return;
+  userName.textContent = usuarioLogado.nome + " " + usuarioLogado.sobrenome;
+  userEmail.textContent = usuarioLogado.email;
+}
+
 async function carregarChamados() {
   try {
-    // Busca todos os chamados com info do usuário
     const url = `${SUPABASE_URL}/rest/v1/${TABLE_NAME}?select=*,usuario_id(nome,sobrenome)&order=criado_em.desc`;
     const resposta = await fetch(url, {
       method: "GET",
@@ -30,17 +47,14 @@ async function carregarChamados() {
         Authorization: `Bearer ${SUPABASE_KEY}`,
       },
     });
-
     if (!resposta.ok) throw new Error("Erro ao carregar chamados");
 
     const chamados = await resposta.json();
     listaChamados.innerHTML = "";
-
     if (chamados.length === 0) {
       semChamados.style.display = "block";
       return;
     }
-
     semChamados.style.display = "none";
 
     chamados.forEach((c) => {
@@ -92,7 +106,6 @@ async function carregarChamados() {
         <button class="btn-salvar">Salvar Alterações</button>
       `;
 
-      // Adiciona evento para salvar alterações
       card.querySelector(".btn-salvar").addEventListener("click", () => {
         atualizarChamado(c.id, card);
       });
@@ -102,14 +115,11 @@ async function carregarChamados() {
 
     aplicarFiltros();
   } catch (erro) {
-    console.error("Erro ao carregar chamados:", erro);
+    console.error(erro);
     alert("Não foi possível carregar os chamados do banco.");
   }
 }
 
-// ================================
-// FUNÇÃO: ATUALIZAR CHAMADO NO SUPABASE
-// ================================
 async function atualizarChamado(id, card) {
   const status = card.querySelector(".select-status").value;
   const prioridade = card.querySelector(".select-prioridade").value;
@@ -132,25 +142,15 @@ async function atualizarChamado(id, card) {
         }),
       }
     );
-
-    if (!resposta.ok) {
-      const erro = await resposta.json();
-      console.error("Erro ao atualizar chamado:", erro);
-      alert("Erro ao atualizar chamado.");
-      return;
-    }
-
+    if (!resposta.ok) throw new Error("Erro ao atualizar chamado");
     alert("Chamado atualizado com sucesso!");
     carregarChamados();
   } catch (erro) {
-    console.error("Erro de conexão:", erro);
+    console.error(erro);
     alert("Não foi possível conectar ao banco.");
   }
 }
 
-// ================================
-// FILTROS
-// ================================
 filtroStatus.addEventListener("change", aplicarFiltros);
 filtroPrioridade.addEventListener("change", aplicarFiltros);
 filtroTipo.addEventListener("change", aplicarFiltros);
@@ -169,12 +169,10 @@ function aplicarFiltros() {
     const tipo = card
       .querySelector("p:nth-child(4)")
       .textContent.split(": ")[1];
-
     const combina =
       (!statusSelecionado || status === statusSelecionado) &&
       (!prioridadeSelecionada || prioridade === prioridadeSelecionada) &&
       (!tipoSelecionado || tipo === tipoSelecionado);
-
     card.style.display = combina ? "block" : "none";
     if (combina) algumVisivel = true;
   });
@@ -182,7 +180,4 @@ function aplicarFiltros() {
   semChamados.style.display = algumVisivel ? "none" : "block";
 }
 
-// ================================
-// INICIALIZAÇÃO
-// ================================
 carregarChamados();

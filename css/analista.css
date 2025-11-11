@@ -4,9 +4,9 @@ body {
   color: #333;
   margin: 0;
   padding: 0;
+  transition: background-color 0.3s, color 0.3s;
 }
 
-/* HEADER COM DEGRADÊ AZUL */
 .header {
   background: linear-gradient(to right, #0a3c9a, #1e63e9, #66a3ff);
   color: #fff;
@@ -22,54 +22,134 @@ body {
   margin: 0;
 }
 
-.menu-icon {
-  font-size: 1.6rem;
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+/* Ícone do usuário */
+.user-area {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+#userIcon {
+  font-size: 1.9rem;
   cursor: pointer;
-  transition: transform 0.3s ease;
+  transition: transform 0.3s ease, color 0.3s ease;
+  color: white;
 }
 
-.menu-icon:hover {
+#userIcon:hover {
   transform: scale(1.1);
-}
-
-/* MENU LATERAL COM DEGRADÊ COMPATÍVEL */
-.menu {
-  position: fixed;
-  top: 0;
-  right: -220px;
-  width: 200px;
-  height: 100%;
-  background: linear-gradient(to bottom, #0a3c9a, #1e63e9, #66a3ff);
-  color: white;
-  transition: right 0.3s ease;
-  padding-top: 70px;
-}
-
-.menu ul {
-  list-style: none;
-  padding: 0;
-}
-
-.menu ul li {
-  margin: 20px 0;
-  text-align: center;
-}
-
-.menu ul li a {
-  color: white;
-  text-decoration: none;
-  font-size: 1rem;
-  transition: color 0.2s ease;
-}
-
-.menu ul li a:hover {
   color: #cce0ff;
 }
 
-.menu.show {
+/* Dropdown do usuário */
+.dropdown {
+  position: absolute;
+  top: 45px;
   right: 0;
+  width: 220px;
+  background: #fff;
+  color: #333;
+  border-radius: 10px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  padding: 15px 10px;
+  text-align: center;
+  display: none;
+  z-index: 200;
+  transition: all 0.3s ease;
 }
 
+.dropdown.show {
+  display: block;
+}
+
+.dropdown .big-icon {
+  font-size: 3rem;
+  margin-bottom: 8px;
+  color: #1e63e9;
+}
+
+.dropdown p {
+  margin: 5px 0;
+  font-size: 0.9rem;
+}
+
+.dropdown hr {
+  margin: 10px 0;
+  border: none;
+  border-top: 1px solid #ccc;
+}
+
+.dropdown button {
+  width: 100%;
+  background: #1e63e9;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 6px 10px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background 0.3s ease;
+}
+
+.dropdown button:hover {
+  background: #0a3c9a;
+}
+
+/* Toggle switch do dark mode */
+.toggle-switch {
+  position: relative;
+  width: 50px;
+  height: 26px;
+  display: flex;
+  align-items: center;
+  margin-left: 0;
+}
+
+.toggle-switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.switch {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #1e63e9;
+  border-radius: 30px;
+  transition: background-color 0.3s ease;
+}
+
+.switch::before {
+  position: absolute;
+  content: "";
+  height: 20px;
+  width: 20px;
+  left: 3px;
+  bottom: 3px;
+  background-color: white;
+  border-radius: 50%;
+  transition: transform 0.3s ease;
+}
+
+input:checked + .switch {
+  background-color: #1e63e9;
+}
+
+input:checked + .switch::before {
+  transform: translateX(24px);
+}
+
+/* Restante do CSS original */
 .container {
   padding: 20px;
   max-width: 900px;
@@ -91,7 +171,6 @@ h2 {
 .sem-chamados {
   color: #1e63e9;
   font-weight: bold;
-  font-size: 1.1rem;
   text-align: center;
   margin-top: 20px;
 }
@@ -101,34 +180,16 @@ h2 {
   border-radius: 12px;
   padding: 20px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  transition: transform 0.2s ease;
-}
-
-.card:hover {
-  transform: scale(1.03);
+  transition: background-color 0.3s, color 0.3s;
 }
 
 .card h3 {
   color: #1e63e9;
 }
 
-.card p {
-  font-size: 14px;
-  color: #555;
-}
-
+.card p,
 label {
-  display: block;
-  margin-top: 10px;
-  font-weight: bold;
-  color: #1d2d50;
-}
-
-/* Foco */
-input:focus,
-select:focus {
-  border-color: #1d2d50;
-  box-shadow: 0 0 6px rgba(29, 45, 80, 0.3);
+  color: #555;
 }
 
 select {
@@ -140,32 +201,6 @@ select {
   font-size: 14px;
 }
 
-.btn-salvar {
-  width: 100%;
-  background-color: #1e63e9;
-  color: white;
-  border: none;
-  border-radius: 8px;
-  padding: 10px;
-  margin-top: 15px;
-  cursor: pointer;
-  font-weight: bold;
-  transition: background-color 0.3s ease;
-}
-
-.btn-salvar:hover {
-  background-color: #174eb9;
-}
-
-footer {
-  margin-top: 30px;
-  text-align: center;
-  font-size: 12px;
-  color: #777;
-  padding: 10px 0;
-}
-
-/* estilização dos filtros*/
 .filtros {
   display: flex;
   justify-content: center;
@@ -179,11 +214,74 @@ footer {
   border: 1px solid #fff;
   border-radius: 8px;
   padding: 8px 12px;
-  font-size: 14px;
   cursor: pointer;
-  transition: all 0.2s ease;
 }
 
 .filtros select:hover {
   border-color: #174eb9;
+}
+
+.btn-salvar {
+  width: 100%;
+  background-color: #1e63e9;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 10px;
+  margin-top: 15px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.btn-salvar:hover {
+  background-color: #174eb9;
+}
+
+footer {
+  text-align: center;
+  padding: 10px 0;
+  margin-top: 30px;
+  color: #777;
+}
+
+body.dark-mode {
+  background-color: #121212;
+  color: #e0e0e0;
+}
+
+body.dark-mode .card {
+  background-color: #1e1e1e;
+  color: #e0e0e0;
+}
+
+body.dark-mode .card h3 {
+  color: #66a3ff;
+}
+
+body.dark-mode select {
+  background-color: #333;
+  color: #fff;
+  border-color: #66a3ff;
+}
+
+body.dark-mode .dropdown {
+  background-color: #1e1e1e;
+  color: #e0e0e0;
+  box-shadow: 0 4px 15px rgba(255, 255, 255, 0.1);
+}
+
+body.dark-mode .dropdown .big-icon {
+  color: #66a3ff;
+}
+
+body.dark-mode .dropdown button {
+  background-color: #334b80;
+}
+
+body.dark-mode .dropdown button:hover {
+  background-color: #1e63e9;
+}
+
+body.dark-mode footer {
+  color: #aaa;
 }

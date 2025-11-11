@@ -4,23 +4,38 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Painel do Analista</title>
-
     <link rel="icon" href="./img/icone.png" type="image/x-icon" />
-
     <link rel="stylesheet" href="./css/analista.css" />
-    <link rel="stylesheet" href="./css/footer.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
   </head>
-
   <body>
-    <!-- Header -->
     <header class="header">
       <h1>Painel do Analista</h1>
+      <div class="header-right">
+        <div class="user-area">
+          <i class="fa-solid fa-circle-user" id="userIcon"></i>
+          <div class="dropdown" id="userDropdown">
+            <i class="fa-solid fa-circle-user big-icon"></i>
+            <p id="userName">Carregando...</p>
+            <p id="userEmail">---</p>
+            <hr />
+            <button id="btnLogout">
+              <i class="fa-solid fa-right-from-bracket"></i> Sair
+            </button>
+          </div>
+        </div>
+        <div class="toggle-switch">
+          <input type="checkbox" id="darkModeToggle" />
+          <label for="darkModeToggle" class="switch"></label>
+        </div>
+      </div>
     </header>
 
     <main class="container">
       <h2>Chamados Abertos</h2>
-
-      <!-- filtros -->
       <div class="filtros">
         <select id="filtro-tipo">
           <option value="">Filtrar por Tipo</option>
@@ -34,14 +49,12 @@
           </option>
           <option value="Outro">Outro</option>
         </select>
-
         <select id="filtro-status">
           <option value="">Filtrar por Status</option>
           <option value="Aberto">Aberto</option>
           <option value="Em andamento">Em andamento</option>
           <option value="Finalizado">Finalizado</option>
         </select>
-
         <select id="filtro-prioridade">
           <option value="">Filtrar por Prioridade</option>
           <option value="Baixa">Baixa</option>
@@ -50,18 +63,11 @@
           <option value="Urgente">Urgente</option>
         </select>
       </div>
-
-      <!-- Lista de chamadss e mensagem se não houver chamadados -->
-
       <div class="lista-chamados"></div>
       <p class="sem-chamados">Não há chamados abertos</p>
     </main>
 
-    <!-- Footer -->
-
     <footer>© Universidade – Service Desk 2025</footer>
-
-    <!-- Scripts -->
     <script src="./JavaScript/analista.js"></script>
   </body>
 </html>

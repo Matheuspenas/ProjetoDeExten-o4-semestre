@@ -1,13 +1,10 @@
 // CONFIGURAÇÕES DO SUPABASE
-
 const SUPABASE_URL = "https://ilnilousfwignxliyjqv.supabase.co";
 const SUPABASE_KEY =
   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imlsbmlsb3VzZndpZ254bGl5anF2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjI0NjIzMTAsImV4cCI6MjA3ODAzODMxMH0.c2TTA1Mk7wu2SGYk7sZrY4mMp-O2PATcuRCIKUsRCpQ";
-
 const TABLE_NAME = "chamados";
 
 // ELEMENTOS DA PÁGINA
-
 const modal = document.getElementById("modal");
 const btnNovo = document.querySelector(".btn-novo");
 const spanClose = document.querySelector(".close");
@@ -17,22 +14,26 @@ const semChamados = document.querySelector(".sem-chamados");
 const btnVerMais = document.querySelector(".btn-ver-mais");
 const darkModeToggle = document.getElementById("darkModeToggle");
 
-// MODO ESCURO
+// DROPDOWN DO USUÁRIO
+const userIcon = document.getElementById("userIcon");
+const userDropdown = document.getElementById("userDropdown");
+const userName = document.getElementById("userName");
+const userEmail = document.getElementById("userEmail");
+const btnLogout = document.getElementById("btnLogout");
 
+// MODO ESCURO
 darkModeToggle.addEventListener("change", () => {
   document.body.classList.toggle("dark-mode", darkModeToggle.checked);
 });
 
 // MODAL
-
 btnNovo.addEventListener("click", () => (modal.style.display = "block"));
 spanClose.addEventListener("click", () => (modal.style.display = "none"));
 window.addEventListener("click", (e) => {
   if (e.target === modal) modal.style.display = "none";
 });
 
-// FUNÇÃO: ATUALIZAR VISUALIZAÇÃO
-
+// FUNÇÃO PARA ATUALIZAR VISUALIZAÇÃO
 function atualizarCards() {
   const cards = document.querySelectorAll(".chamados .card");
   if (cards.length === 0) {
@@ -41,8 +42,7 @@ function atualizarCards() {
   } else {
     semChamados.style.display = "none";
     cards.forEach((card, index) => {
-      if (index > 2) card.classList.add("hidden");
-      else card.classList.remove("hidden");
+      card.classList.toggle("hidden", index > 2);
     });
     btnVerMais.style.display = cards.length > 3 ? "inline-block" : "none";
     btnVerMais.textContent = "Ver mais";
@@ -50,7 +50,6 @@ function atualizarCards() {
 }
 
 // BOTÃO VER MAIS / VER MENOS
-
 btnVerMais.addEventListener("click", () => {
   const ocultos = document.querySelectorAll(".card.hidden");
   if (ocultos.length > 0) {
@@ -64,17 +63,12 @@ btnVerMais.addEventListener("click", () => {
   }
 });
 
-// FUNÇÃO: CARREGAR CHAMADOS DO BANCO
-
+// CARREGAR CHAMADOS DO BANCO
 async function carregarChamados() {
   try {
     const usuarioLogado = JSON.parse(localStorage.getItem("usuarioLogado"));
     const usuario_id = usuarioLogado?.id;
-
-    if (!usuario_id) {
-      console.warn("Nenhum usuário logado encontrado.");
-      return;
-    }
+    if (!usuario_id) return;
 
     const resposta = await fetch(
       `${SUPABASE_URL}/rest/v1/${TABLE_NAME}?usuario_id=eq.${usuario_id}&select=*`,
@@ -87,10 +81,7 @@ async function carregarChamados() {
       }
     );
 
-    if (!resposta.ok) {
-      throw new Error("Erro ao carregar chamados");
-    }
-
+    if (!resposta.ok) throw new Error("Erro ao carregar chamados");
     const chamados = await resposta.json();
     chamadosContainer.innerHTML = "";
 
@@ -98,13 +89,10 @@ async function carregarChamados() {
       semChamados.style.display = "block";
     } else {
       semChamados.style.display = "none";
-
       const chamadosOrdenados = chamados.sort(
         (a, b) => new Date(b.criado_em) - new Date(a.criado_em)
       );
-
       chamadosOrdenados.forEach((c) => {
-        // Define a cor do status conforme o valor
         let statusClass = "";
         if (c.status === "Aberto") statusClass = "aberto";
         else if (c.status === "Em andamento") statusClass = "em-andamento";
@@ -139,27 +127,20 @@ async function carregarChamados() {
   }
 }
 
-// FUNÇÃO: CADASTRAR NOVO CHAMADO
-
+// CADASTRAR NOVO CHAMADO
 formChamado.addEventListener("submit", async (e) => {
   e.preventDefault();
 
   const titulo = document.getElementById("titulo").value.trim();
   const tipo = document.getElementById("tipo").value.trim();
   const descricao = document.getElementById("descricao").value.trim();
-
-  if (!titulo || !tipo || !descricao) {
-    alert("Por favor, preencha todos os campos.");
-    return;
-  }
+  if (!titulo || !tipo || !descricao) return alert("Preencha todos os campos.");
 
   const usuarioLogado = JSON.parse(localStorage.getItem("usuarioLogado"));
   const usuario_id = usuarioLogado?.id;
-
   if (!usuario_id) {
-    alert("Erro: Usuário não identificado. Faça login novamente.");
-    window.location.href = "./index.html";
-    return;
+    alert("Erro: Usuário não identificado.");
+    return (window.location.href = "./index.html");
   }
 
   try {
@@ -184,8 +165,7 @@ formChamado.addEventListener("submit", async (e) => {
     if (!resposta.ok) {
       const erro = await resposta.json();
       console.error("Erro ao criar chamado:", erro);
-      alert("Erro ao criar chamado. Tente novamente.");
-      return;
+      return alert("Erro ao criar chamado.");
     }
 
     formChamado.reset();
@@ -194,10 +174,36 @@ formChamado.addEventListener("submit", async (e) => {
     alert("Chamado cadastrado com sucesso!");
   } catch (err) {
     console.error("Erro de conexão:", err);
-    alert("Não foi possível conectar ao banco. Verifique sua internet.");
+    alert("Não foi possível conectar ao banco.");
   }
 });
 
-// INICIALIZAÇÃO
+// DROPDOWN DO USUÁRIO
+function carregarUsuario() {
+  try {
+    const usuarioLogado = JSON.parse(localStorage.getItem("usuarioLogado"));
+    if (!usuarioLogado) return;
+    userName.textContent = usuarioLogado.nome || "Usuário";
+    userEmail.textContent = usuarioLogado.email || "---";
+  } catch (err) {
+    console.error("Erro ao carregar usuário:", err);
+  }
+}
 
+userIcon.addEventListener("click", (e) => {
+  e.stopPropagation();
+  userDropdown.classList.toggle("show");
+});
+
+document.addEventListener("click", () => {
+  userDropdown.classList.remove("show");
+});
+
+btnLogout.addEventListener("click", () => {
+  localStorage.removeItem("usuarioLogado");
+  window.location.href = "./index.html";
+});
+
+// INICIALIZAÇÃO
+carregarUsuario();
 carregarChamados();

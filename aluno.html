@@ -4,33 +4,52 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Tela do Aluno</title>
-
     <link rel="icon" href="./img/icone.png" type="image/x-icon" />
-
     <link rel="stylesheet" href="./css/aluno.css" />
+    <script
+      src="https://kit.fontawesome.com/a2e0b5a5b6.js"
+      crossorigin="anonymous"
+    ></script>
   </head>
 
   <body>
     <!-- Header -->
     <header class="header">
       <h1>Solicitação de Chamados</h1>
-      <div class="toggle-switch">
-        <input type="checkbox" id="darkModeToggle" />
-        <label for="darkModeToggle" class="switch"></label>
+
+      <div class="header-right">
+        <!-- Ícone do usuário -->
+        <div class="user-area">
+          <i class="fa-solid fa-circle-user" id="userIcon"></i>
+          <div class="dropdown" id="userDropdown">
+            <i class="fa-solid fa-circle-user big-icon"></i>
+            <p id="userName">Carregando...</p>
+            <p id="userEmail">---</p>
+            <hr />
+            <button id="btnLogout">
+              <i class="fa-solid fa-right-from-bracket"></i> Sair
+            </button>
+          </div>
+        </div>
+
+        <!-- Toggle dark mode -->
+        <div class="toggle-switch">
+          <input type="checkbox" id="darkModeToggle" />
+          <label for="darkModeToggle" class="switch"></label>
+        </div>
       </div>
     </header>
 
-    <!-- Botão de abrir novos chamadados -->
+    <!-- Conteúdo principal -->
     <main class="container">
       <button class="btn-novo">+ Abrir Novo Chamado</button>
 
-      <!-- Mensagem quando não houver chamados -->
       <div class="chamados"></div>
       <p class="sem-chamados">Não há chamados no momento</p>
 
       <button class="btn-ver-mais">Ver mais</button>
 
-      <!-- Modal de Novo Chamado -->
+      <!-- Modal -->
       <div id="modal" class="modal">
         <div class="modal-content">
           <span class="close">&times;</span>
@@ -66,10 +85,13 @@
       </div>
     </main>
 
-    <!-- Footer -->
     <footer>© Universidade – Service Desk 2025</footer>
 
     <!-- Scripts -->
     <script src="./JavaScript/aluno.js"></script>
+    <script
+      src="https://kit.fontawesome.com/837fbc3de2.js"
+      crossorigin="anonymous"
+    ></script>
   </body>
 </html>

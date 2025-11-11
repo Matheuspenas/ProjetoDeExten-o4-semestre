@@ -23,6 +23,19 @@
           <input type="checkbox" id="darkModeToggle" />
           <label for="darkModeToggle" class="switch"></label>
         </div>
+        <!-- Ícone de Usuário -->
+        <div class="user-area">
+          <i id="userIcon" class="fas fa-user-circle"></i>
+          <div class="dropdown" id="userDropdown">
+            <i class="big-icon fas fa-user-circle"></i>
+            <p id="userName">Nome do Usuário</p>
+            <p id="userEmail">email@dominio.com</p>
+            <hr />
+            <button id="btnLogout">
+              <i class="fa-solid fa-right-from-bracket"></i> Sair
+            </button>
+          </div>
+        </div>
       </div>
     </nav>
 
@@ -115,5 +128,9 @@
       </section>
     </main>
     <script src="./JavaScript/gestor.js"></script>
+    <script
+      src="https://kit.fontawesome.com/837fbc3de2.js"
+      crossorigin="anonymous"
+    ></script>
   </body>
 </html>

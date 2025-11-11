@@ -271,3 +271,38 @@ document.addEventListener("DOMContentLoaded", () => {
   atualizarTudoBanco();
   setInterval(atualizarTudoBanco, 10000);
 });
+
+// DROPDOWN DO USUÁRIO
+const userIcon = document.getElementById("userIcon");
+const userDropdown = document.getElementById("userDropdown");
+const userName = document.getElementById("userName");
+const userEmail = document.getElementById("userEmail");
+const btnLogout = document.getElementById("btnLogout");
+
+// Mostrar/ocultar dropdown ao clicar no ícone
+userIcon.addEventListener("click", () => {
+  userDropdown.classList.toggle("show");
+  carregarUsuario();
+});
+
+// Fechar dropdown ao clicar fora
+document.addEventListener("click", (e) => {
+  if (!userIcon.contains(e.target) && !userDropdown.contains(e.target)) {
+    userDropdown.classList.remove("show");
+  }
+});
+
+// Função para carregar dados do usuário logado
+function carregarUsuario() {
+  const usuarioLogado = JSON.parse(localStorage.getItem("usuarioLogado"));
+  if (!usuarioLogado) return;
+
+  userName.textContent = `${usuarioLogado.nome} ${usuarioLogado.sobrenome}`;
+  userEmail.textContent = usuarioLogado.email;
+}
+
+// Logout e redirecionamento
+btnLogout.addEventListener("click", () => {
+  localStorage.removeItem("usuarioLogado");
+  window.location.href = "./index.html";
+});

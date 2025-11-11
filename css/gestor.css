@@ -504,3 +504,99 @@ body.dark-mode #tabelaUsuarios tbody tr:hover {
     flex-grow: 1;
   }
 }
+
+/* Ícone do usuário no header */
+.user-area {
+  position: relative;
+  display: flex;
+  align-items: center;
+  margin-left: 15px;
+}
+
+#userIcon {
+  font-size: 1.9rem;
+  cursor: pointer;
+  transition: transform 0.3s ease, color 0.3s ease;
+  color: white;
+}
+
+#userIcon:hover {
+  transform: scale(1.1);
+  color: #cce0ff;
+}
+
+/* Dropdown do usuário */
+.dropdown {
+  position: absolute;
+  top: 45px;
+  right: 0;
+  width: 220px;
+  background: #fff;
+  color: #333;
+  border-radius: 10px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  padding: 15px 10px;
+  text-align: center;
+  display: none;
+  z-index: 200;
+  transition: all 0.3s ease;
+}
+
+.dropdown.show {
+  display: block;
+}
+
+.dropdown .big-icon {
+  font-size: 3rem;
+  margin-bottom: 8px;
+  color: #1e63e9;
+}
+
+.dropdown p {
+  margin: 5px 0;
+  font-size: 0.9rem;
+}
+
+.dropdown hr {
+  margin: 10px 0;
+  border: none;
+  border-top: 1px solid #ccc;
+}
+
+.dropdown button {
+  width: 100%;
+  background-color: #1e63e9;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 6px 10px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background 0.3s ease;
+}
+
+.dropdown button:hover {
+  background-color: #174eb9;
+}
+
+/* Dark Mode do usuário */
+body.dark-mode #userIcon {
+  color: #66a3ff;
+}
+body.dark-mode #userIcon:hover {
+  color: #99cfff;
+}
+body.dark-mode .dropdown {
+  background: #1e1e1e;
+  color: #e0e0e0;
+  box-shadow: 0 4px 15px rgba(255, 255, 255, 0.1);
+}
+body.dark-mode .dropdown .big-icon {
+  color: #66a3ff;
+}
+body.dark-mode .dropdown button {
+  background-color: #334b80;
+}
+body.dark-mode .dropdown button:hover {
+  background-color: #1e63e9;
+}

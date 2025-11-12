@@ -55,14 +55,31 @@ Este é um projeto front-end que utiliza as bases do desenvolvimento web:
 
 ---
 
+## ⚙️ Integração com APIs (Supabase + EmailJS)
+
+O sistema utiliza **duas APIs principais** para garantir o funcionamento completo das operações:
+
+### 🔹 Supabase — Banco de Dados e Autenticação
+
+A **Supabase** é utilizada como backend do sistema, fornecendo uma base de dados PostgreSQL em nuvem.  
+Ela armazena todos os registros de **usuários e chamados**, permitindo comunicação direta via **REST API**.
+
+### 🔹 EmailJS — Envio Automático de E-mails
+
+O **EmailJS** é responsável por realizar o **envio automático de e-mails**, sem necessidade de servidor backend.  
+Ele é utilizado para **recuperar senhas**.  
+Os templates de e-mail são configurados na plataforma.
+
+---
+
 ## 🧠 Lógica e Fluxo de Trabalho
 
 A lógica do projeto se baseia na segregação de acesso e responsabilidades:
 
-1.  O **Usuário Padrão** se autentica e abre um chamado.
-2.  O chamado é **encaminhado** para a página dedicada do **Analista**.
-3.  O Analista assume o chamado, define sua **Prioridade** e acompanha sua execução alterando o **Status**.
-4.  O **Gestor** tem uma visão macro, acessando métricas em tempo real sobre o volume, o desempenho e a eficiência da Central de Serviços.
+1. O **Usuário Padrão** se autentica e abre um chamado.
+2. O chamado é **encaminhado** para a página dedicada do **Analista**.
+3. O Analista assume o chamado, define sua **Prioridade** e acompanha sua execução alterando o **Status**.
+4. O **Gestor** tem uma visão macro, acessando métricas em tempo real sobre o volume, o desempenho e a eficiência da Central de Serviços.
 
 ---
 

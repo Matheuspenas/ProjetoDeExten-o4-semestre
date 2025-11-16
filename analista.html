@@ -34,9 +34,12 @@
       </div>
     </header>
 
+    <!-- Seção de chamados Abertos -->
+
     <main class="container">
       <h2>Chamados Abertos</h2>
       <div class="filtros">
+        <!-- Filtro por Tipo/Categoria -->
         <select id="filtro-tipo">
           <option value="">Filtrar por Tipo</option>
           <option value="Acessos e Contas">Acessos e Contas</option>
@@ -49,12 +52,18 @@
           </option>
           <option value="Outro">Outro</option>
         </select>
+
+        <!-- Filtro por Status -->
+
         <select id="filtro-status">
           <option value="">Filtrar por Status</option>
           <option value="Aberto">Aberto</option>
           <option value="Em andamento">Em andamento</option>
           <option value="Finalizado">Finalizado</option>
         </select>
+
+        <!-- Filtro por Prioridade -->
+
         <select id="filtro-prioridade">
           <option value="">Filtrar por Prioridade</option>
           <option value="Baixa">Baixa</option>
@@ -63,11 +72,17 @@
           <option value="Urgente">Urgente</option>
         </select>
       </div>
+
+      <!-- Lista de chamados e mensagem caso não houver chamados -->
+
       <div class="lista-chamados"></div>
       <p class="sem-chamados">Não há chamados abertos</p>
     </main>
 
+    <!-- Footer -->
     <footer>© Universidade – Service Desk 2025</footer>
+
+    <!-- Scripts -->
     <script src="./JavaScript/analista.js"></script>
   </body>
 </html>

@@ -238,15 +238,36 @@ select {
 }
 
 footer {
+  position: relative;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  margin-top: 200px;
   text-align: center;
-  padding: 10px 0;
-  margin-top: 30px;
-  color: #777;
+  font-size: 12px;
+  color: #fff;
+  padding: 15px 0;
+  width: 100%;
+  background: linear-gradient(to right, #0a3c9a, #1e63e9, #66a3ff);
+}
+
+/* Modo Escuro */
+
+body.dark-mode .header {
+  background: linear-gradient(to right, #0a1a3a, #1e2f60, #334b80);
+}
+
+body.dark-mode #userIcon {
+  color: #66a3ff;
 }
 
 body.dark-mode {
   background-color: #121212;
   color: #e0e0e0;
+}
+
+body.dark-mode .container h2 {
+  color: #66a3ff;
 }
 
 body.dark-mode .card {
@@ -256,6 +277,14 @@ body.dark-mode .card {
 
 body.dark-mode .card h3 {
   color: #66a3ff;
+}
+
+body.dark-mode .card p {
+  color: #ffffff;
+}
+
+body.dark-mode .card label {
+  color: #ffffff;
 }
 
 body.dark-mode select {
@@ -283,7 +312,7 @@ body.dark-mode .dropdown button:hover {
 }
 
 body.dark-mode footer {
-  color: #aaa;
+  background: linear-gradient(to right, #0a1a3a, #1e2f60, #334b80);
 }
 
 body.dark-mode .toast {

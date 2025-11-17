@@ -285,3 +285,97 @@ body.dark-mode .dropdown button:hover {
 body.dark-mode footer {
   color: #aaa;
 }
+
+body.dark-mode .toast {
+  background-color: #222;
+  color: #f1f1f1;
+  border-left-color: #4aa3ff;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.6);
+}
+
+body.dark-mode .toast.error {
+  border-left-color: #ff6b6b;
+}
+
+body.dark-mode #loadingOverlay {
+  background: rgba(0, 0, 0, 0.75);
+}
+
+body.dark-mode #spinner {
+  border-color: #555;
+  border-top-color: #4aa3ff;
+}
+
+/* ======== TOASTS ======== */
+#toast-container {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 2000;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.toast {
+  background-color: #fff;
+  border-left: 6px solid;
+  color: #333;
+  padding: 14px 18px;
+  border-radius: 8px;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.15);
+  min-width: 250px;
+  animation: slideInRight 0.4s ease, fadeOut 0.5s ease 3.5s forwards;
+  font-weight: 500;
+}
+
+.toast.success {
+  border-color: #1e90ff;
+}
+.toast.error {
+  border-color: #e74c3c;
+}
+
+@keyframes slideInRight {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes fadeOut {
+  to {
+    opacity: 0;
+    transform: translateX(100%);
+  }
+}
+
+/* ======== SPINNER (CARREGAMENTO) ======== */
+#loading-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(255, 255, 255, 0.8);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 1500;
+}
+
+.spinner {
+  width: 60px;
+  height: 60px;
+  border: 6px solid #ccc;
+  border-top-color: #1e63e9;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}

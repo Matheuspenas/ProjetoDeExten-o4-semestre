@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Painel do Analista</title>
+
     <link rel="icon" href="./img/icone.png" type="image/x-icon" />
     <link rel="stylesheet" href="./css/analista.css" />
     <link
@@ -11,7 +12,9 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
     />
   </head>
+
   <body>
+    <!-- Header -->
     <header class="header">
       <h1>Painel do Analista</h1>
       <div class="header-right">
@@ -81,6 +84,14 @@
 
     <!-- Footer -->
     <footer>© Universidade – Service Desk 2025</footer>
+
+    <!-- Toasts (mensagens flutuantes) -->
+    <div id="toast-container"></div>
+
+    <!-- Spinner de carregamento -->
+    <div id="loading-overlay">
+      <div class="spinner"></div>
+    </div>
 
     <!-- Scripts -->
     <script src="./JavaScript/analista.js"></script>

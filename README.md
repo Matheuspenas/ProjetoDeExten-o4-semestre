@@ -122,3 +122,9 @@ A lógica do projeto se baseia na segregação de acesso e responsabilidades:
 | 💼 **LinkedIn**  | [linkedin.com/in/paulo-vinicius-carraro-250619348](www.linkedin.com/in/paulo-vinicius-carraro-250619348) |
 | 📸 **Instagram** | [@paulo.\_carraro](https://www.instagram.com/paulo._carraro?igsh=M3N1c3pjMjYwdzhw)                       |
 | 💻 **GitHub**    | [paulovcarraro](https://github.com/Paulovcarraro)                                                        |
+
+**Vinicius Leite Malaquias**
+
+| Contato       | Link                            |
+| :------------ | :------------------------------ |
+| 💻 **GitHub** | [vinvinum](github.com/vinvinum) |

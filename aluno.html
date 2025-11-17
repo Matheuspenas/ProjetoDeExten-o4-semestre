@@ -49,14 +49,17 @@
 
       <button class="btn-ver-mais">Ver mais</button>
 
-      <!-- Modal -->
+      <!-- Modal de Cadastro de Chamados -->
       <div id="modal" class="modal">
         <div class="modal-content">
           <span class="close">&times;</span>
           <h2>Novo Chamado</h2>
           <form id="formChamado">
+            <!-- Campo do Titulo DO Chamado -->
             <label for="titulo">Título:</label>
             <input type="text" id="titulo" name="titulo" required />
+
+            <!-- Select do Tipo/Categoria do Chamado -->
 
             <label for="tipo">Tipo de Solicitação:</label>
             <select id="tipo" name="tipo" required>
@@ -76,22 +79,30 @@
               <option value="Outro">Outro</option>
             </select>
 
+            <!-- Textarea da Descrição do Chamado -->
+
             <label for="descricao">Descrição:</label>
             <textarea id="descricao" name="descricao" required></textarea>
 
+            <!-- Botão para Cadastrar O Chamado -->
             <button type="submit" class="btn-enviar">Cadastrar</button>
           </form>
         </div>
       </div>
     </main>
 
+    <!-- Footer -->
     <footer>© Universidade – Service Desk 2025</footer>
+
+    <!-- Toasts (mensagens flutuantes) -->
+    <div id="toast-container"></div>
+
+    <!-- Spinner de carregamento -->
+    <div id="loading-overlay">
+      <div class="spinner"></div>
+    </div>
 
     <!-- Scripts -->
     <script src="./JavaScript/aluno.js"></script>
-    <script
-      src="https://kit.fontawesome.com/837fbc3de2.js"
-      crossorigin="anonymous"
-    ></script>
   </body>
 </html>

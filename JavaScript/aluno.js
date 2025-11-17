@@ -21,19 +21,68 @@ const userName = document.getElementById("userName");
 const userEmail = document.getElementById("userEmail");
 const btnLogout = document.getElementById("btnLogout");
 
-// MODO ESCURO
+//  TOAST + SPINNER (com suporte ao modo escuro)
+
+const toastContainer = document.getElementById("toast-container");
+const loadingOverlay = document.getElementById("loading-overlay");
+
+function applyThemeToUI() {
+  const dark = document.body.classList.contains("dark-mode");
+
+  // Tema do overlay
+  loadingOverlay.style.background = dark
+    ? "rgba(20,20,20,0.8)"
+    : "rgba(255,255,255,0.8)";
+
+  // Tema do spinner
+  document.querySelector(".spinner").style.borderTopColor = dark
+    ? "#4a90e2"
+    : "#1e63e9";
+}
+
+function showToast(message, type = "success") {
+  const toast = document.createElement("div");
+  toast.classList.add("toast", type);
+
+  const dark = document.body.classList.contains("dark-mode");
+
+  toast.style.backgroundColor = dark ? "#1f1f1f" : "#fff";
+  toast.style.color = dark ? "#f1f1f1" : "#333";
+  toast.style.borderLeftColor = type === "success" ? "#1e90ff" : "#e74c3c";
+
+  toast.textContent = message;
+
+  toastContainer.appendChild(toast);
+
+  setTimeout(() => toast.remove(), 4000);
+}
+
+function showLoading() {
+  applyThemeToUI();
+  loadingOverlay.style.display = "flex";
+}
+
+function hideLoading() {
+  loadingOverlay.style.display = "none";
+}
+
+//  MODO ESCURO
+
 darkModeToggle.addEventListener("change", () => {
   document.body.classList.toggle("dark-mode", darkModeToggle.checked);
+  applyThemeToUI();
 });
 
-// MODAL
+//  MODAL
+
 btnNovo.addEventListener("click", () => (modal.style.display = "block"));
 spanClose.addEventListener("click", () => (modal.style.display = "none"));
 window.addEventListener("click", (e) => {
   if (e.target === modal) modal.style.display = "none";
 });
 
-// FUNÇÃO PARA ATUALIZAR VISUALIZAÇÃO
+//  FUNÇÃO PARA ATUALIZAR VISUALIZAÇÃO DOS CARDS
+
 function atualizarCards() {
   const cards = document.querySelectorAll(".chamados .card");
   if (cards.length === 0) {
@@ -63,9 +112,12 @@ btnVerMais.addEventListener("click", () => {
   }
 });
 
-// CARREGAR CHAMADOS DO BANCO
+//  CARREGAR CHAMADOS
+
 async function carregarChamados() {
   try {
+    showLoading();
+
     const usuarioLogado = JSON.parse(localStorage.getItem("usuarioLogado"));
     const usuario_id = usuarioLogado?.id;
     if (!usuario_id) return;
@@ -81,7 +133,13 @@ async function carregarChamados() {
       }
     );
 
-    if (!resposta.ok) throw new Error("Erro ao carregar chamados");
+    hideLoading();
+
+    if (!resposta.ok) {
+      showToast("Erro ao carregar chamados.", "error");
+      return;
+    }
+
     const chamados = await resposta.json();
     chamadosContainer.innerHTML = "";
 
@@ -92,6 +150,7 @@ async function carregarChamados() {
       const chamadosOrdenados = chamados.sort(
         (a, b) => new Date(b.criado_em) - new Date(a.criado_em)
       );
+
       chamadosOrdenados.forEach((c) => {
         let statusClass = "";
         if (c.status === "Aberto") statusClass = "aberto";
@@ -104,9 +163,9 @@ async function carregarChamados() {
           <h3>${c.titulo}</h3>
           <p><strong>Tipo:</strong> ${c.tipo || "Não informado"}</p>
           <p><strong>Descrição:</strong> ${c.descricao}</p>
-          <p class="status"><strong>Status:</strong> <span class="estado ${statusClass}">${
-          c.status
-        }</span></p>
+          <p class="status"><strong>Status:</strong> 
+            <span class="estado ${statusClass}">${c.status}</span>
+          </p>
           <p><strong>Prioridade:</strong> ${c.prioridade}</p>
           <p><strong>Criado em:</strong> ${new Date(c.criado_em).toLocaleString(
             "pt-BR"
@@ -123,27 +182,33 @@ async function carregarChamados() {
 
     atualizarCards();
   } catch (erro) {
+    hideLoading();
     console.error("Erro ao carregar chamados:", erro);
+    showToast("Erro inesperado ao carregar.", "error");
   }
 }
 
-// CADASTRAR NOVO CHAMADO
+//  CADASTRAR NOVO CHAMADO
+
 formChamado.addEventListener("submit", async (e) => {
   e.preventDefault();
 
   const titulo = document.getElementById("titulo").value.trim();
   const tipo = document.getElementById("tipo").value.trim();
   const descricao = document.getElementById("descricao").value.trim();
-  if (!titulo || !tipo || !descricao) return alert("Preencha todos os campos.");
+  if (!titulo || !tipo || !descricao)
+    return showToast("Preencha todos os campos.", "error");
 
   const usuarioLogado = JSON.parse(localStorage.getItem("usuarioLogado"));
   const usuario_id = usuarioLogado?.id;
   if (!usuario_id) {
-    alert("Erro: Usuário não identificado.");
+    showToast("Erro: usuário não identificado.", "error");
     return (window.location.href = "./index.html");
   }
 
   try {
+    showLoading();
+
     const resposta = await fetch(`${SUPABASE_URL}/rest/v1/${TABLE_NAME}`, {
       method: "POST",
       headers: {
@@ -162,23 +227,26 @@ formChamado.addEventListener("submit", async (e) => {
       }),
     });
 
+    hideLoading();
+
     if (!resposta.ok) {
-      const erro = await resposta.json();
-      console.error("Erro ao criar chamado:", erro);
-      return alert("Erro ao criar chamado.");
+      showToast("Erro ao criar chamado.", "error");
+      return;
     }
 
     formChamado.reset();
     modal.style.display = "none";
     carregarChamados();
-    alert("Chamado cadastrado com sucesso!");
+    showToast("Chamado cadastrado com sucesso!", "success");
   } catch (err) {
+    hideLoading();
     console.error("Erro de conexão:", err);
-    alert("Não foi possível conectar ao banco.");
+    showToast("Não foi possível conectar ao servidor.", "error");
   }
 });
 
-// DROPDOWN DO USUÁRIO
+//  DROPDOWN DO USUÁRIO
+
 function carregarUsuario() {
   try {
     const usuarioLogado = JSON.parse(localStorage.getItem("usuarioLogado"));
@@ -204,6 +272,8 @@ btnLogout.addEventListener("click", () => {
   window.location.href = "./index.html";
 });
 
-// INICIALIZAÇÃO
+//  INICIALIZAÇÃO
+
 carregarUsuario();
 carregarChamados();
+applyThemeToUI();

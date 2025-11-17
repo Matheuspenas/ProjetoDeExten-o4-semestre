@@ -1,9 +1,35 @@
+// Inicializa EmailJS
 (function () {
   emailjs.init({
     publicKey: "d6cClnGrNJL2j-Jh3",
   });
 })();
 
+// ==== Função TOAST ====
+function showToast(message, type = "success") {
+  const container = document.getElementById("toast-container");
+
+  const toast = document.createElement("div");
+  toast.classList.add("toast", type);
+  toast.textContent = message;
+
+  container.appendChild(toast);
+
+  setTimeout(() => toast.remove(), 4000);
+}
+
+// ==== Overlay de carregamento ====
+const loadingOverlay = document.getElementById("loading-overlay");
+
+function showLoading() {
+  loadingOverlay.style.display = "flex";
+}
+
+function hideLoading() {
+  loadingOverlay.style.display = "none";
+}
+
+// ==== FORM DE RECUPERAÇÃO ====
 document
   .getElementById("recuperarForm")
   .addEventListener("submit", function (e) {
@@ -12,7 +38,7 @@ document
     const emailusuario = document.getElementById("email").value.trim();
 
     if (!emailusuario) {
-      alert("Por favor, digite um e-mail válido.");
+      showToast("Digite um e-mail válido.", "error");
       return;
     }
 
@@ -21,22 +47,29 @@ document
     )}`;
 
     const params = {
-      emailusuario: emailusuario, // destinatário (To Email)
-      email: emailusuario, // aparece no texto do e-mail
-      link: linkRedefinicao, // usado dentro do corpo do e-mail
+      emailusuario: emailusuario,
+      email: emailusuario,
+      link: linkRedefinicao,
       from_name: "Central de Serviço TI",
     };
+
+    // Mostra carregamento
+    showLoading();
 
     emailjs
       .send("service_ybwlqbt", "template_ytcqvfn", params)
       .then(() => {
-        alert(
-          `✅ Um e-mail foi enviado para ${emailusuario} com o link de redefinição de senha.`
+        hideLoading();
+        showToast(
+          `Um e-mail foi enviado para ${emailusuario} com instruções para a redefinição de senha.`,
+          "success"
         );
+
         document.getElementById("recuperarForm").reset();
       })
       .catch((error) => {
+        hideLoading();
         console.error("Erro ao enviar e-mail:", error);
-        alert("❌ Ocorreu um erro ao enviar o e-mail. Tente novamente.");
+        showToast("Erro ao enviar o e-mail. Tente novamente.", "error");
       });
   });

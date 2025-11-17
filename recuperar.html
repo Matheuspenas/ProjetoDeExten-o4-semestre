@@ -17,6 +17,7 @@
   </head>
 
   <body>
+    <!-- Form para adicionar o email que será enviado o link para redifinição de senha -->
     <div class="recuperar">
       <div class="form_recuperar">
         <img src="./img/icone.png" alt="Logo da Universidade" class="logo" />
@@ -37,6 +38,8 @@
               required
             />
           </div>
+
+          <!-- Botão para envio  do link -->
           <div class="inputenviar">
             <button type="submit" class="enviar">Enviar link</button>
           </div>
@@ -46,6 +49,14 @@
 
     <!-- Footer -->
     <footer>© Universidade – Service Desk 2025</footer>
+
+    <!-- Toasts (mensagens flutuantes) -->
+    <div id="toast-container"></div>
+
+    <!-- Spinner de carregamento -->
+    <div id="loading-overlay">
+      <div class="spinner"></div>
+    </div>
 
     <!-- Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
